@@ -66,6 +66,10 @@ public class PlayerManager : MonoBehaviour
 
     // ----------------------------------------------------------------------------------------------------------
     
+    /// <summary>
+    /// Called in Start()
+    /// Initialize and instantiate the default structure
+    /// </summary>
     private void InitializeStructure()
     {
         for (int i = 0; i < this.structureHeight; i++)
@@ -78,12 +82,13 @@ public class PlayerManager : MonoBehaviour
                 InitializeBuilding(i,j, this.structure[i,j]);
             }
         }
-        AssignNeighbour();
+        InitializeNeighbour();
     }
     
     // ----------------------------------------------------------------------------------------------------------
     
     /// <summary>
+    /// Called in InitializeStructure()
     /// Instantiate the given building at the given position
     /// </summary>
     /// <param name="coordonnees"></param>
@@ -125,7 +130,7 @@ public class PlayerManager : MonoBehaviour
     
     // ----------------------------------------------------------------------------------------------------------
 
-    private void AssignNeighbour()
+    private void InitializeNeighbour()
     {
         for (int i = 0; i < this.structureHeight; i++)
         {
@@ -134,10 +139,10 @@ public class PlayerManager : MonoBehaviour
                 if (this.structureBuilding[i, j] == null)
                     continue;
                 
-                this.structureBuilding[i, j].SetLeftNeighbour(this.structureBuilding[i, j - 1]);
-                this.structureBuilding[i, j].SetRightNeighbour(this.structureBuilding[i, j + 1]);
-                this.structureBuilding[i, j].SetTopNeighbour(this.structureBuilding[i + 1, j]);
-                this.structureBuilding[i, j].SetBottomNeighbour(this.structureBuilding[i - 1, j]);
+                this.structureBuilding[i, j].SetLeftNeighbour(this.structureBuilding[i, j - 1] != null ? this.structureBuilding[i, j - 1] : null);
+                this.structureBuilding[i, j].SetRightNeighbour(this.structureBuilding[i, j + 1] != null ? this.structureBuilding[i, j + 1] : null);
+                this.structureBuilding[i, j].SetTopNeighbour(this.structureBuilding[i + 1, j] != null ? this.structureBuilding[i + 1,j] : null);
+                this.structureBuilding[i, j].SetBottomNeighbour(this.structureBuilding[i - 1, j] != null ? this.structureBuilding[i - 1,j] : null);
             }
         }
     }
@@ -146,6 +151,18 @@ public class PlayerManager : MonoBehaviour
     #endregion
 
 
+    #region Functions
+
+    public void SetBuildingNeighbour(int i, int j)
+    {
+        this.structureBuilding[i, j].SetLeftNeighbour(this.structureBuilding[i, j - 1] != null ? this.structureBuilding[i, j - 1] : null);
+        this.structureBuilding[i, j].SetRightNeighbour(this.structureBuilding[i, j + 1] != null ? this.structureBuilding[i, j + 1] : null);
+        this.structureBuilding[i, j].SetTopNeighbour(this.structureBuilding[i + 1, j] != null ? this.structureBuilding[i + 1,j] : null);
+        this.structureBuilding[i, j].SetBottomNeighbour(this.structureBuilding[i - 1, j] != null ? this.structureBuilding[i - 1,j] : null);
+    }
+
+    #endregion
+    
     #region Destruction
 
     public void LaunchCheckConnectedBuilding()
@@ -186,6 +203,8 @@ public class PlayerManager : MonoBehaviour
             }
         }
 
+        InitializeNeighbour();
+        
         this.destructionWasCalled = false;
         
         yield break;
