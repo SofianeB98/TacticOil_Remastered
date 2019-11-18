@@ -101,31 +101,48 @@ public class PlayerManager : MonoBehaviour
             case BuildingType.Center:
                 building = CenterPoolScript.Instance.WakeUp();
                 this.structureBuilding[i, j] = building;
+                
                 building.WakeUp(new Vector3(j - this.structureWidth/2,0, i - this.structureHeight/2), this.transform,
                             null, null, null, null);
+                
+                building.SetPlayerManager(this);
+                building.SetTabPosition(i, j);
                 break;
             
             case BuildingType.City:
                 building = CityPoolScript.Instance.WakeUp();
                 this.structureBuilding[i, j] = building;
+                
                 building.WakeUp(new Vector3(j - this.structureWidth/2,0, i - this.structureHeight/2), this.transform,
                     null, null, null, null);
+                
+                building.SetPlayerManager(this);
+                building.SetTabPosition(i, j);
                 break;
             
             case BuildingType.Foreuse:
                 building = ForeusePoolScript.Instance.WakeUp();
                 this.structureBuilding[i, j] = building;
+                
                 building.WakeUp(new Vector3(j - this.structureWidth/2,0, i - this.structureHeight/2), this.transform,
                     null, null, null, null);
+                
+                building.SetPlayerManager(this);
+                building.SetTabPosition(i, j);
                 break;
             
             case BuildingType.Canon:
                 building = CanonPoolScript.Instance.WakeUp();
                 this.structureBuilding[i, j] = building;
+                
                 building.WakeUp(new Vector3(j - this.structureWidth/2,0, i - this.structureHeight/2), this.transform,
                     null, null, null, null);
+                
+                building.SetPlayerManager(this);
+                building.SetTabPosition(i, j);
                 break;
         }
+        
     }
     
     // ----------------------------------------------------------------------------------------------------------
@@ -150,7 +167,6 @@ public class PlayerManager : MonoBehaviour
     // ----------------------------------------------------------------------------------------------------------
     #endregion
 
-
     #region Functions
 
     public void SetBuildingNeighbour(int i, int j)
@@ -161,6 +177,12 @@ public class PlayerManager : MonoBehaviour
         this.structureBuilding[i, j].SetBottomNeighbour(this.structureBuilding[i - 1, j] != null ? this.structureBuilding[i - 1,j] : null);
     }
 
+    public void RemoveBuildingFromTab(int i, int j)
+    {
+        this.structure[i, j] = BuildingType.None;
+        this.structureBuilding[i, j] = null;
+    }
+    
     #endregion
     
     #region Destruction

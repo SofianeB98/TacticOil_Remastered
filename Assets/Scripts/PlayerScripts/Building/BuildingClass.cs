@@ -18,6 +18,8 @@ public class BuildingClass : MonoBehaviour
     [Header("Information")] 
     [SerializeField] protected float defaultResistance = 100.0f;
     private float currentResistance = 0.0f;
+
+    private int posTabX, posTabY;
     
     #region Pooling
 
@@ -25,8 +27,11 @@ public class BuildingClass : MonoBehaviour
         BuildingClass leftNeighbour, BuildingClass rightNeighbour, BuildingClass topNeighbour,  BuildingClass bottomNeighbour)
     {
         this.currentResistance = this.defaultResistance;
+        
         this.isConnectedToTheCenter = true;
+        
         this.transform.position = position;
+        
         this.bottomNeighbour = bottomNeighbour;
         this.leftNeighbour = leftNeighbour;
         this.rightNeighbour = rightNeighbour;
@@ -44,6 +49,8 @@ public class BuildingClass : MonoBehaviour
         this.bottomNeighbour = null;
         this.isConnectedToTheCenter = false;
         
+        this.playerManager.RemoveBuildingFromTab(this.posTabX, this.posTabY);
+        
         this.transform.SetParent(null);
         this.gameObject.SetActive(false);
     }
@@ -52,6 +59,11 @@ public class BuildingClass : MonoBehaviour
     
     #region Setter
 
+    public void SetPlayerManager(PlayerManager playerManager)
+    {
+        this.playerManager = playerManager;
+    }
+    
     public void SetLeftNeighbour(BuildingClass neighbour = null)
     {
         this.leftNeighbour = neighbour;
@@ -79,6 +91,12 @@ public class BuildingClass : MonoBehaviour
         if(launchNeighbourChecker)
             SetNeighbourConnectedToTheCenter();
     }
+
+    public void SetTabPosition(int i, int j)
+    {
+        this.posTabX = i;
+        this.posTabY = j;
+    }
     
     #endregion
 
@@ -88,9 +106,11 @@ public class BuildingClass : MonoBehaviour
         if (this.currentResistance <= 0.0f)
         {
             Sleep();
-            
-            if(this.playerManager != null)
+
+            if (this.playerManager != null)
+            {
                 this.playerManager.LaunchCheckConnectedBuilding();
+            }
         }
     }
 
