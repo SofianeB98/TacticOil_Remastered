@@ -33,6 +33,8 @@ public class CameraController : MonoBehaviour
         {
             this.playerCam.position = this.player.position + this.playerCam.rotation *
                                       new Vector3(0, 0, -this.distanceFromPlayer);
+
+            this.playerCam.rotation =  Quaternion.Euler(this.currentXAngle, this.currentYAngle, 0.0f);
         }
     }
 
@@ -40,9 +42,11 @@ public class CameraController : MonoBehaviour
     {
         this.currentXAngle = this.currentXAngle +
                              dir.x * this.speedRotate * this.angleXSpeed * Time.deltaTime * (this.inverseX ? -1 : 1);
+        this.AngleXVerification();
         
         this.currentYAngle = this.currentYAngle +
                              dir.y * this.speedRotate * this.angleYSpeed * Time.deltaTime * (this.inverseY ? -1 : 1);
+        this.AngleYVerification();
     }
 
     private void AngleYVerification() 

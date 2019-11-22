@@ -209,7 +209,7 @@ MonoBehaviour:
   player: {fileID: 3284644874931583073}
   distanceFromPlayer: 10
   angleXLimits: {x: 75, y: 20}
-  speedRotate: 10
+  speedRotate: 5
   angleXSpeed: 25
   inverseX: 0
   angleYSpeed: 25
@@ -226,3 +226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57c2e9effdbabb147b8939d19ba452ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraController: {fileID: 392591836374371935}
+  rotationXAxis: Mouse X
+  rotationYAxis: Mouse Y
+  deadZone: 0.05
