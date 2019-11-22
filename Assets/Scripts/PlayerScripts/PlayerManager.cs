@@ -7,6 +7,9 @@ using UnityEngine.UIElements;
 
 public class PlayerManager : MonoBehaviour
 {
+    [SerializeField] private int playerID = 1;
+    public int PlayerID => playerID;
+    
     [Header("Structure Creation")]
     [SerializeField] private int structureHeight = 6;
     [SerializeField] private int structureWidth = 4;

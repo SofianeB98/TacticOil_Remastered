@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6279630578380353980}
   - component: {fileID: 3284644874931583086}
   - component: {fileID: 2914314969755765473}
+  - component: {fileID: 8782169804942098093}
   m_Layer: 0
   m_Name: '[PLAYER]'
   m_TagString: Untagged
@@ -63,6 +64,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d7ced17c4bce884eb34a319d1dc5c7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerID: 1
   structureHeight: 7
   structureWidth: 5
 --- !u!114 &2914314969755765473
@@ -78,3 +80,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 6279630578380353980}
+  speedRange: {x: 0, y: 25}
+  currentSpeed: 0
+  increaseSpeedRapidity: 2
+  rotationSpeed: 2
+  increaseRotationRapidity: 2
+  currentRotate: 0
+--- !u!114 &8782169804942098093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3284644874931583072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecd20f1bb5584f149990c58a80f183b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerManager: {fileID: 0}
+  playerController: {fileID: 0}
+  deplacementAxis: Vertical
+  rotationAxis: Horizontal
+  fireButton: 97
+  constructorModeButton: 97
+  validationButton: 114
+  switchRightSelectedBuildingButton: 107
+  switchLeftSelectedBuildingButton: 108

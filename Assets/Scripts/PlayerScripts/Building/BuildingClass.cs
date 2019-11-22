@@ -49,12 +49,15 @@ public class BuildingClass : MonoBehaviour
         this.bottomNeighbour = null;
         this.isConnectedToTheCenter = false;
         
-        this.playerManager.RemoveBuildingFromTab(this.posTabX, this.posTabY);
+        if(this.playerManager != null)
+            this.playerManager.RemoveBuildingFromTab(this.posTabX, this.posTabY);
+
+        this.playerManager = null;
         
         this.transform.SetParent(null);
         this.gameObject.SetActive(false);
     }
-    
+
     #endregion
     
     #region Setter
