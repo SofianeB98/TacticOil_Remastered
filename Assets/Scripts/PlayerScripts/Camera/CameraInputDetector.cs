@@ -19,7 +19,7 @@ public class CameraInputDetector : MonoBehaviour
 
     }
 
-    void Update()
+    public void UpdateCustom()
     {
         if (this.cameraController != null)
         {

@@ -17,13 +17,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Range(0.1f, 15.0f)] private float increaseRotationRapidity = 2.0f;
     [SerializeField] private float currentRotate = 0.0f;
     
-    void Start()
+    private void Start()
     {
         this.currentSpeed = 0.0f;
         this.currentRotate = 0.0f;
     }
 
-    void Update()
+    public void UpdateCustom()
     {
         this.transform.rotation = Quaternion.Lerp(this.transform.rotation, 
                                                 Quaternion.Euler(0,this.currentRotate,0), 

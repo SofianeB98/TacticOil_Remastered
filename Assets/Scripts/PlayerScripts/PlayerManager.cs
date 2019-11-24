@@ -9,6 +9,12 @@ public class PlayerManager : MonoBehaviour
 {
     [SerializeField] private int playerID = 1;
     public int PlayerID => playerID;
+
+    [Header("Player Behavior")] 
+    [SerializeField] private CameraController cameraController;
+    [SerializeField] private CameraInputDetector cameraInputDetector;
+    [SerializeField] private PlayerController playerController;
+    [SerializeField] private PlayerInputDetector playerInputDetector;
     
     [Header("Structure Creation")]
     [SerializeField] private int structureHeight = 6;
@@ -53,6 +59,18 @@ public class PlayerManager : MonoBehaviour
         
         this.structure[midHeight, midWidth+1] = BuildingType.Canon;
         this.structure[midHeight, midWidth-1] = BuildingType.Canon;
+
+        if (this.playerInputDetector == null)
+            this.playerInputDetector = GetComponent<PlayerInputDetector>();
+        
+        if (this.cameraInputDetector == null)
+            this.cameraInputDetector = GetComponent<CameraInputDetector>();
+        
+        if (this.playerController == null)
+            this.playerController = GetComponent<PlayerController>();
+
+        if (this.cameraController == null)
+            this.cameraController = GetComponent<CameraController>();
     }
 
     // ----------------------------------------------------------------------------------------------------------
@@ -170,6 +188,25 @@ public class PlayerManager : MonoBehaviour
     // ----------------------------------------------------------------------------------------------------------
     #endregion
 
+    #region Loop
+
+    private void Update()
+    {
+        if (this.playerInputDetector != null)
+            this.playerInputDetector.UpdateCustom();
+        
+        if(this.cameraInputDetector != null)
+            this.cameraInputDetector.UpdateCustom();
+
+        if (this.playerController != null)
+            this.playerController.UpdateCustom();
+        
+        if(this.cameraController != null)
+            this.cameraController.UpdateCustom();
+    }
+
+    #endregion
+    
     #region Functions
 
     public void SetBuildingNeighbour(int i, int j)

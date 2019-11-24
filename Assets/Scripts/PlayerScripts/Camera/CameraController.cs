@@ -22,19 +22,20 @@ public class CameraController : MonoBehaviour
     private float currentXAngle = 45.0f;
     private float currentYAngle = 0.0f;
     
-    void Start()
+    private void Start()
     {
         this.playerCam.SetParent(null);
     }
 
-    void Update()
+    public void UpdateCustom()
     {
         if (this.playerCam != null)
         {
+            this.playerCam.rotation =  Quaternion.Euler(this.currentXAngle, this.currentYAngle, 0.0f);
+            
             this.playerCam.position = this.player.position + this.playerCam.rotation *
                                       new Vector3(0, 0, -this.distanceFromPlayer);
 
-            this.playerCam.rotation =  Quaternion.Euler(this.currentXAngle, this.currentYAngle, 0.0f);
         }
     }
 
