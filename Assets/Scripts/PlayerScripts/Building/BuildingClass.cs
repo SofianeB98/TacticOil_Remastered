@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BuildingClass : MonoBehaviour
 {
-    [SerializeField] private PlayerManager playerManager;
+    [SerializeField] protected PlayerManager playerManager;
     
     protected bool isConnectedToTheCenter = true;
     public bool IsConnectedToTheCenter => isConnectedToTheCenter;

@@ -20,10 +20,13 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private int structureHeight = 6;
     [SerializeField] private int structureWidth = 4;
     private BuildingType[,] structure;
-
-    //[Header("Structure Building")]
     private BuildingClass[,] structureBuilding;
     private bool destructionWasCalled = false;
+    
+    // -- Actions --
+    public delegate void Fire();
+    public event Fire OnRightFire;
+    public event Fire OnLeftFire;
     
     #region Initialization
     // ----------------------------------------------------------------------------------------------------------
@@ -80,7 +83,7 @@ public class PlayerManager : MonoBehaviour
     /// </summary>
     private IEnumerator Start()
     {
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(0.1f);
         InitializeStructure();
         yield break;
     }
@@ -123,21 +126,20 @@ public class PlayerManager : MonoBehaviour
                 building = CenterPoolScript.Instance.WakeUp();
                 this.structureBuilding[i, j] = building;
                 
+                building.SetPlayerManager(this);
+                
                 building.WakeUp(new Vector3(j - this.structureWidth/2,0, i - this.structureHeight/2), this.transform,
                             null, null, null, null);
-                
-                building.SetPlayerManager(this);
                 building.SetTabPosition(i, j);
                 break;
             
             case BuildingType.City:
                 building = CityPoolScript.Instance.WakeUp();
                 this.structureBuilding[i, j] = building;
+                building.SetPlayerManager(this);
                 
                 building.WakeUp(new Vector3(j - this.structureWidth/2,0, i - this.structureHeight/2), this.transform,
                     null, null, null, null);
-                
-                building.SetPlayerManager(this);
                 building.SetTabPosition(i, j);
                 break;
             
@@ -145,10 +147,10 @@ public class PlayerManager : MonoBehaviour
                 building = ForeusePoolScript.Instance.WakeUp();
                 this.structureBuilding[i, j] = building;
                 
+                building.SetPlayerManager(this);
+                
                 building.WakeUp(new Vector3(j - this.structureWidth/2,0, i - this.structureHeight/2), this.transform,
                     null, null, null, null);
-                
-                building.SetPlayerManager(this);
                 building.SetTabPosition(i, j);
                 break;
             
@@ -156,10 +158,10 @@ public class PlayerManager : MonoBehaviour
                 building = CanonPoolScript.Instance.WakeUp();
                 this.structureBuilding[i, j] = building;
                 
+                building.SetPlayerManager(this);
+                
                 building.WakeUp(new Vector3(j - this.structureWidth/2,0, i - this.structureHeight/2), this.transform,
                     null, null, null, null);
-                
-                building.SetPlayerManager(this);
                 building.SetTabPosition(i, j);
                 break;
         }
@@ -205,6 +207,20 @@ public class PlayerManager : MonoBehaviour
             this.cameraController.UpdateCustom();
     }
 
+    #endregion
+
+    #region Fire Functions
+
+    public void LeftFire()
+    {
+        OnLeftFire();
+    }
+
+    public void RightFire()
+    {
+        OnRightFire();
+    }
+    
     #endregion
     
     #region Functions

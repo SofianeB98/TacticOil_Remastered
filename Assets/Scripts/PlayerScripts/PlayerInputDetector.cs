@@ -13,7 +13,8 @@ public class PlayerInputDetector : MonoBehaviour
     [SerializeField] private string rotationAxis = "Horizontal";
 
     [Header("Action Input")] 
-    [SerializeField] private KeyCode fireButton = KeyCode.A;
+    [SerializeField] private KeyCode fireLeftButton = KeyCode.Alpha1;
+    [SerializeField] private KeyCode fireRightButton = KeyCode.Alpha2;
     
     [Header("Construtor Mode Input")]
     [SerializeField] private KeyCode constructorModeButton = KeyCode.E;
@@ -39,13 +40,23 @@ public class PlayerInputDetector : MonoBehaviour
     // Update is called once per frame
     public void UpdateCustom()
     {
-        if (this.playerManager != null)
+        if (this.playerManager != null && this.playerController != null)
         {
             float yAxis = Input.GetAxis(this.deplacementAxis);
             float xAxis = Input.GetAxis(this.rotationAxis);
             
             this.playerController.UpdateMovementSpeed(yAxis);
             this.playerController.UpdateRotation(xAxis);
+
+            if (Input.GetKeyDown(this.fireLeftButton))
+            {
+                this.playerManager.LeftFire();
+            }
+
+            if (Input.GetKeyDown(this.fireRightButton))
+            {
+                this.playerManager.RightFire();
+            }
         }
     }
 }
