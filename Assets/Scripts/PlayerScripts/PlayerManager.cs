@@ -23,6 +23,12 @@ public class PlayerManager : MonoBehaviour
     private BuildingClass[,] structureBuilding;
     private bool destructionWasCalled = false;
 
+    [Header("Structure Informations")] 
+    [SerializeField] private float weightOffset = 5.0f;
+    [SerializeField] private float minWeight = 10.0f;
+    [SerializeField] private Vector2 weightCoeffRange = new Vector2(0.25f, 1.75f);
+    private float currentWeight = 0.0f;
+    
     [Header("Mode")] 
     [SerializeField] private PlayerMode currentMode = PlayerMode.Normal;
     public PlayerMode CurrentMode => currentMode;
@@ -246,6 +252,16 @@ public class PlayerManager : MonoBehaviour
     public void SetPlayerMode(PlayerMode mode)
     {
         this.currentMode = mode;
+    }
+
+    public void UpdateStructureWeight(float value)
+    {
+        this.currentWeight += value;
+    }
+    
+    public float GetWeightCoeff()
+    {
+        return Mathf.Clamp((this.minWeight + this.weightOffset) / this.currentWeight, this.weightCoeffRange.x, this.weightCoeffRange.y);
     }
     
     #endregion

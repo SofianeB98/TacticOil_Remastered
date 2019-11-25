@@ -15,9 +15,11 @@ public class BuildingClass : MonoBehaviour
     [SerializeField] protected BuildingClass topNeighbour;
     [SerializeField] protected BuildingClass bottomNeighbour;
 
-    [Header("Information")] 
+    [Header("Informations")] 
+    [SerializeField] protected float buildingWeight = 1.0f;
     [SerializeField] protected float defaultResistance = 100.0f;
     private float currentResistance = 0.0f;
+    public float BuildingWeight => buildingWeight;
 
     private int posTabX, posTabY;
     
@@ -37,6 +39,8 @@ public class BuildingClass : MonoBehaviour
         this.rightNeighbour = rightNeighbour;
         this.topNeighbour = topNeighbour;
         
+        this.playerManager.UpdateStructureWeight(this.buildingWeight);
+        
         this.transform.SetParent(parent);
         this.gameObject.SetActive(true);
     }
@@ -48,9 +52,12 @@ public class BuildingClass : MonoBehaviour
         this.topNeighbour = null;
         this.bottomNeighbour = null;
         this.isConnectedToTheCenter = false;
-        
-        if(this.playerManager != null)
+
+        if (this.playerManager != null)
+        {
+            this.playerManager.UpdateStructureWeight(-this.buildingWeight);
             this.playerManager.RemoveBuildingFromTab(this.posTabX, this.posTabY);
+        }
 
         this.playerManager = null;
         
