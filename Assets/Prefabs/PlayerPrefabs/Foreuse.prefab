@@ -110,4 +110,5 @@ MonoBehaviour:
   rightNeighbour: {fileID: 0}
   topNeighbour: {fileID: 0}
   bottomNeighbour: {fileID: 0}
+  buildingWeight: 2
   defaultResistance: 100

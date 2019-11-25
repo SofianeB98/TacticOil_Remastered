@@ -157,6 +157,9 @@ MonoBehaviour:
   playerInputDetector: {fileID: 8782169804942098093}
   structureHeight: 7
   structureWidth: 5
+  weightOffset: 5
+  minWeight: 14
+  weightCoeffRange: {x: 0.25, y: 1.75}
   currentMode: 0
 --- !u!114 &2914314969755765473
 MonoBehaviour:
@@ -171,11 +174,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 6279630578380353980}
+  playerManager: {fileID: 3284644874931583086}
   speedRange: {x: 0, y: 25}
   currentSpeed: 0
   increaseSpeedRapidity: 2
-  rotationSpeed: 2
-  increaseRotationRapidity: 2
+  rotationSpeed: 5
+  increaseRotationRapidity: 50
   currentRotate: 0
 --- !u!114 &8782169804942098093
 MonoBehaviour:
@@ -233,6 +237,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraController: {fileID: 392591836374371935}
+  playerManager: {fileID: 0}
   rotationXAxis: Mouse X
   rotationYAxis: Mouse Y
   deadZone: 0.05
