@@ -22,11 +22,15 @@ public class PlayerManager : MonoBehaviour
     private BuildingType[,] structure;
     private BuildingClass[,] structureBuilding;
     private bool destructionWasCalled = false;
-    
+
+    [Header("Mode")] 
+    [SerializeField] private PlayerMode currentMode = PlayerMode.Normal;
+    public PlayerMode CurrentMode => currentMode;
+
     // -- Actions --
     public delegate void Fire();
-    public event Fire OnRightFire;
-    public event Fire OnLeftFire;
+    public event Fire OnRightFire; // Used to call every "Fire" function for each canon at the right of the center
+    public event Fire OnLeftFire; // Used to call every "Fire" function for each canon at the left of the center
     
     #region Initialization
     // ----------------------------------------------------------------------------------------------------------
@@ -237,6 +241,11 @@ public class PlayerManager : MonoBehaviour
     {
         this.structure[i, j] = BuildingType.None;
         this.structureBuilding[i, j] = null;
+    }
+
+    public void SetPlayerMode(PlayerMode mode)
+    {
+        this.currentMode = mode;
     }
     
     #endregion

@@ -42,20 +42,41 @@ public class PlayerInputDetector : MonoBehaviour
     {
         if (this.playerManager != null && this.playerController != null)
         {
-            float yAxis = Input.GetAxis(this.deplacementAxis);
-            float xAxis = Input.GetAxis(this.rotationAxis);
+            switch (this.playerManager.CurrentMode)
+            {
+                case PlayerMode.Normal:
+                    // -- Move & Rotate Input
+                    float yAxis = Input.GetAxis(this.deplacementAxis);
+                    float xAxis = Input.GetAxis(this.rotationAxis);
             
-            this.playerController.UpdateMovementSpeed(yAxis);
-            this.playerController.UpdateRotation(xAxis);
+                    this.playerController.UpdateMovementSpeed(yAxis);
+                    this.playerController.UpdateRotation(xAxis);
 
-            if (Input.GetKeyDown(this.fireLeftButton))
-            {
-                this.playerManager.LeftFire();
-            }
+                    // -- Fire Input
+                    if (Input.GetKeyDown(this.fireLeftButton))
+                    {
+                        this.playerManager.LeftFire();
+                    }
 
-            if (Input.GetKeyDown(this.fireRightButton))
-            {
-                this.playerManager.RightFire();
+                    if (Input.GetKeyDown(this.fireRightButton))
+                    {
+                        this.playerManager.RightFire();
+                    }
+                    
+                    // -- Construtor Mode Input
+                    if (Input.GetKeyDown(this.constructorModeButton))
+                    {
+                        this.playerManager.SetPlayerMode(PlayerMode.Constructor);
+                    }
+                    break;
+                
+                case PlayerMode.Constructor:
+                    // -- Construtor Mode Input
+                    if (Input.GetKeyUp(this.constructorModeButton))
+                    {
+                        this.playerManager.SetPlayerMode(PlayerMode.Normal);
+                    }
+                    break;
             }
         }
     }

@@ -157,6 +157,7 @@ MonoBehaviour:
   playerInputDetector: {fileID: 8782169804942098093}
   structureHeight: 7
   structureWidth: 5
+  currentMode: 0
 --- !u!114 &2914314969755765473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,7 +193,8 @@ MonoBehaviour:
   playerController: {fileID: 0}
   deplacementAxis: Vertical
   rotationAxis: Horizontal
-  fireButton: 97
+  fireLeftButton: 49
+  fireRightButton: 50
   constructorModeButton: 97
   validationButton: 114
   switchRightSelectedBuildingButton: 107

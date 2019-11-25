@@ -5,6 +5,7 @@ using UnityEngine;
 public class CameraInputDetector : MonoBehaviour
 {
     [SerializeField] private CameraController cameraController;
+    [SerializeField] private PlayerManager playerManager;
     
     [Header("Rotation Input")] 
     [SerializeField] private string rotationXAxis = "Mouse X";
@@ -17,19 +18,32 @@ public class CameraInputDetector : MonoBehaviour
         if (this.cameraController == null)
             this.cameraController = GetComponent<CameraController>();
 
+        if (this.playerManager == null)
+            this.playerManager = GetComponent<PlayerManager>();
     }
 
     public void UpdateCustom()
     {
-        if (this.cameraController != null)
+        if (this.cameraController != null && this.playerManager != null)
         {
-            float xAxis = Input.GetAxis(rotationXAxis);
-            float yAxis = Input.GetAxis(rotationYAxis);
-            
-            if (Mathf.Abs(xAxis) > this.deadZone || Mathf.Abs(yAxis) > this.deadZone )
+            switch (this.playerManager.CurrentMode)
             {
-                this.cameraController.UpdateCameraAngle(new Vector3(yAxis, xAxis, 0));
+                case PlayerMode.Normal:
+                    float xAxis = Input.GetAxis(rotationXAxis);
+                    float yAxis = Input.GetAxis(rotationYAxis);
+            
+                    if (Mathf.Abs(xAxis) > this.deadZone || Mathf.Abs(yAxis) > this.deadZone )
+                    {
+                        this.cameraController.UpdateCameraAngle(new Vector3(yAxis, xAxis, 0));
+                    }
+                    break;
+                
+                case PlayerMode.Constructor:
+                    // --
+                    break;
             }
+            
+            
         }
     }
 }
