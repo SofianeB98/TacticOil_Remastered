@@ -215,6 +215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b5846b6c9014fc4582dbf1314d1c7cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerManager: {fileID: 3284644874931583086}
   playerCam: {fileID: 4219196857642382632}
   player: {fileID: 3284644874931583073}
   distanceFromPlayer: 10
@@ -224,6 +225,7 @@ MonoBehaviour:
   inverseX: 0
   angleYSpeed: 10
   inverseY: 0
+  yOffset: 10
 --- !u!114 &4384385288524468376
 MonoBehaviour:
   m_ObjectHideFlags: 0

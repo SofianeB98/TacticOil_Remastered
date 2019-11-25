@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-
+    [SerializeField] private PlayerManager playerManager;
     [SerializeField] private Transform playerCam;
     [SerializeField] private Transform player;
     
@@ -18,6 +18,9 @@ public class CameraController : MonoBehaviour
     [SerializeField] private bool inverseX = false;
     [SerializeField, Range(1.0f, 100.0f)] private float angleYSpeed = 25.0f;
     [SerializeField] private bool inverseY = false;
+
+    [Header("Constructor Information")] 
+    [SerializeField] private float yOffset = 5.0f;
     
     private float currentXAngle = 45.0f;
     private float currentYAngle = 0.0f;
@@ -31,11 +34,22 @@ public class CameraController : MonoBehaviour
     {
         if (this.playerCam != null)
         {
-            this.playerCam.rotation =  Quaternion.Euler(this.currentXAngle, this.currentYAngle, 0.0f);
+            switch (this.playerManager.CurrentMode)
+            {
+                case PlayerMode.Normal:
+                    this.playerCam.rotation =  Quaternion.Euler(this.currentXAngle, this.currentYAngle, 0.0f);
             
-            this.playerCam.position = this.player.position + this.playerCam.rotation *
-                                      new Vector3(0, 0, -this.distanceFromPlayer);
-
+                    this.playerCam.position = this.player.position + this.playerCam.rotation *
+                                              new Vector3(0, 0, -this.distanceFromPlayer);
+                    break;
+                
+                case PlayerMode.Constructor:
+                    // --- To be update 
+                    this.playerCam.position = Vector3.Lerp(this.playerCam.position,
+                        this.player.position + new Vector3(0.0f, this.yOffset, 0.0f), Time.deltaTime*5.0f);
+                    this.playerCam.rotation = Quaternion.Lerp(this.playerCam.rotation, Quaternion.Euler(90.0f, 0.0f, 0.0f), Time.deltaTime * 7.0f);
+                    break;
+            }
         }
     }
 
