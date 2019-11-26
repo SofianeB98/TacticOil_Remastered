@@ -313,6 +313,17 @@ public class PlayerManager : MonoBehaviour
     {
         return Mathf.Clamp((this.minWeight + this.weightOffset) / this.currentWeight, this.weightCoeffRange.x, this.weightCoeffRange.y);
     }
+
+    public void UpdateStructureTypeAt(int i, int j, int previousI, int previousJ, BuildingClass building)
+    {
+        this.structure[i, j] = building.Building;
+        this.structureBuilding[i, j] = building;
+        if (previousI != -1 && previousJ != -1)
+        {
+            this.structure[previousI, previousJ] = BuildingType.None;
+            this.structureBuilding[previousI, previousJ] = null;
+        }
+    }
     
     #endregion
 

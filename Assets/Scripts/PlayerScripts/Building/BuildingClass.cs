@@ -16,10 +16,12 @@ public class BuildingClass : MonoBehaviour
     [SerializeField] protected BuildingClass bottomNeighbour;
 
     [Header("Informations")] 
+    [SerializeField] protected BuildingType building;
     [SerializeField] protected float buildingWeight = 1.0f;
     [SerializeField] protected float defaultResistance = 100.0f;
     private float currentResistance = 0.0f;
     public float BuildingWeight => buildingWeight;
+    public BuildingType Building => building;
 
     private int posTabX, posTabY;
     
@@ -56,7 +58,14 @@ public class BuildingClass : MonoBehaviour
         if (this.playerManager != null)
         {
             this.playerManager.UpdateStructureWeight(-this.buildingWeight);
-            this.playerManager.RemoveBuildingFromTab(this.posTabX, this.posTabY);
+            this.playerManager.RemoveBuildingFromTab(this.posTabY, this.posTabX);
+            
+            if (this.topNeighbour.Building == BuildingType.Foreuse)
+            {
+                this.playerManager.UpdateStructureTypeAt(this.posTabY, this.posTabX, this.posTabY + 1, this.posTabX, this.topNeighbour);
+                this.topNeighbour.SetTabPosition(this.posTabY, this.posTabX);
+                this.topNeighbour.SetPosition(this.transform.localPosition);
+            }
         }
 
         this.playerManager = null;
