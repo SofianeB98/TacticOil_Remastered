@@ -386,6 +386,12 @@ public class PlayerManager : MonoBehaviour
                 Debug.Log("Foreuse pas loin X");
                 return;
             }
+
+            if (this.structure[this.currentY - 1, x] == BuildingType.Foreuse)
+            {
+                Debug.Log("Foreuse en bas");
+                return;
+            }
         }
         
         if((this.structure[this.currentY,this.currentX] == BuildingType.Foreuse && y > this.currentY))
@@ -396,8 +402,6 @@ public class PlayerManager : MonoBehaviour
                 return;
 
         Debug.Log("On change la position");
-        
-        Debug.Log(dirX + " dir x " + dirY + " dir Y ");
         
         this.currentX = x;
         this.currentY = y;
@@ -439,6 +443,18 @@ public class PlayerManager : MonoBehaviour
     {
         if (this.structure[this.currentY, this.currentX] == BuildingType.Center)
             return;
+
+        if (this.structure[this.currentY, this.currentX] == BuildingType.Foreuse)
+        {
+            if(this.currentY + 1 == this.structureHeight)
+                return;
+            
+            this.structure[this.currentY + 1, this.currentX] = BuildingType.Foreuse;
+            BuildingClass foreuse = this.structureBuilding[this.currentY, this.currentX];
+            this.structureBuilding[this.currentY + 1, this.currentX] = foreuse;
+            foreuse.SetTabPosition(this.currentY + 1, this.currentX);
+            foreuse.SetPosition(new Vector3(this.currentX - this.midWidth,0, this.currentY + 1 - this.midHeight));
+        }
         
         BuildingClass building;
         switch (this.currentSelectedBuilding)
@@ -508,6 +524,9 @@ public class PlayerManager : MonoBehaviour
         }
         
         this.structure[this.currentY, this.currentX] = this.currentSelectedBuilding;
+        
+        if(this.structure[this.currentY + 1, this.currentX] == BuildingType.Foreuse)
+            SetBuildingNeighbour(this.currentY + 1, this.currentX);
     }
     
     #endregion

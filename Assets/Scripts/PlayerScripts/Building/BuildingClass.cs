@@ -107,7 +107,11 @@ public class BuildingClass : MonoBehaviour
         this.posTabX = i;
         this.posTabY = j;
     }
-    
+
+    public void SetPosition(Vector3 pos)
+    {
+        this.transform.localPosition = pos;
+    }
     #endregion
 
     public virtual void ApplyDamage(float damage)
