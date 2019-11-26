@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,7 +25,15 @@ public class BuildingClass : MonoBehaviour
     public BuildingType Building => building;
 
     private int posTabX, posTabY;
-    
+
+    private void Update()
+    {
+        if (this.defaultResistance <= 0)
+        {
+            ApplyDamage(200);
+        }
+    }
+
     #region Pooling
 
     public virtual void WakeUp(Vector3 position, Transform parent, 
@@ -49,29 +58,49 @@ public class BuildingClass : MonoBehaviour
 
     public virtual void Sleep()
     {
-        this.leftNeighbour = null;
-        this.rightNeighbour = null;
-        this.topNeighbour = null;
-        this.bottomNeighbour = null;
+        this.gameObject.SetActive(false);
         this.isConnectedToTheCenter = false;
+        
+        if (this.leftNeighbour != null)
+            this.leftNeighbour.SetRightNeighbour(null);
 
+        if (this.rightNeighbour != null)
+            this.rightNeighbour.SetLeftNeighbour(null);
+        
+        if(this.topNeighbour != null)
+            this.topNeighbour.SetBottomNeighbour(null);
+        
+        if(this.bottomNeighbour != null)
+            this.bottomNeighbour.SetTopNeighbour(null);
+        
         if (this.playerManager != null)
         {
             this.playerManager.UpdateStructureWeight(-this.buildingWeight);
             this.playerManager.RemoveBuildingFromTab(this.posTabY, this.posTabX);
-            
-            if (this.topNeighbour.Building == BuildingType.Foreuse)
+
+            if (this.topNeighbour != null)
             {
-                this.playerManager.UpdateStructureTypeAt(this.posTabY, this.posTabX, this.posTabY + 1, this.posTabX, this.topNeighbour);
-                this.topNeighbour.SetTabPosition(this.posTabY, this.posTabX);
-                this.topNeighbour.SetPosition(this.transform.localPosition);
+                if (this.topNeighbour.Building == BuildingType.Foreuse)
+                {
+                    this.playerManager.UpdateStructureTypeAt(this.posTabY, this.posTabX, this.posTabY + 1, this.posTabX,
+                        this.topNeighbour);
+                    this.topNeighbour.SetTabPosition(this.posTabY, this.posTabX);
+                    this.topNeighbour.SetPosition(this.transform.localPosition);
+                }
             }
+            
+            this.leftNeighbour = null;
+            this.rightNeighbour = null;
+            this.topNeighbour = null;
+            this.bottomNeighbour = null;
+            
+            this.playerManager.LaunchCheckConnectedBuilding();
         }
 
         this.playerManager = null;
         
         this.transform.SetParent(null);
-        this.gameObject.SetActive(false);
+        
     }
 
     #endregion
@@ -129,30 +158,25 @@ public class BuildingClass : MonoBehaviour
         if (this.currentResistance <= 0.0f)
         {
             Sleep();
-
-            if (this.playerManager != null)
-            {
-                this.playerManager.LaunchCheckConnectedBuilding();
-            }
         }
     }
 
     public virtual void SetNeighbourConnectedToTheCenter()
     {
         if(this.leftNeighbour != null)
-            if(!this.leftNeighbour.IsConnectedToTheCenter)
+            if(!this.leftNeighbour.IsConnectedToTheCenter && this.leftNeighbour.gameObject.activeSelf)
                 this.leftNeighbour.SetConnectedToTheCenter(true ,true);
         
         if(this.rightNeighbour != null)
-            if(!this.rightNeighbour.IsConnectedToTheCenter)
+            if(!this.rightNeighbour.IsConnectedToTheCenter && this.rightNeighbour.gameObject.activeSelf)
                 this.rightNeighbour.SetConnectedToTheCenter(true,true);
         
         if(this.bottomNeighbour != null)
-            if(!this.bottomNeighbour.IsConnectedToTheCenter)
+            if(!this.bottomNeighbour.IsConnectedToTheCenter && this.bottomNeighbour.gameObject.activeSelf)
                 this.bottomNeighbour.SetConnectedToTheCenter(true,true);
         
         if(this.topNeighbour != null)
-            if(!this.topNeighbour.IsConnectedToTheCenter)
+            if(!this.topNeighbour.IsConnectedToTheCenter && this.topNeighbour.gameObject.activeSelf)
                 this.topNeighbour.SetConnectedToTheCenter(true,true);
     }
 }

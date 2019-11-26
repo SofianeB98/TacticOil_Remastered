@@ -215,10 +215,13 @@ public class PlayerManager : MonoBehaviour
                 if (this.structureBuilding[i, j] == null)
                     continue;
                 
-                this.structureBuilding[i, j].SetLeftNeighbour(this.structureBuilding[i, j - 1] != null ? this.structureBuilding[i, j - 1] : null);
-                this.structureBuilding[i, j].SetRightNeighbour(this.structureBuilding[i, j + 1] != null ? this.structureBuilding[i, j + 1] : null);
-                this.structureBuilding[i, j].SetTopNeighbour(this.structureBuilding[i + 1, j] != null ? this.structureBuilding[i + 1,j] : null);
-                this.structureBuilding[i, j].SetBottomNeighbour(this.structureBuilding[i - 1, j] != null ? this.structureBuilding[i - 1,j] : null);
+                this.structureBuilding[i, j].SetLeftNeighbour(this.structureBuilding[i, j - 1 > 0 ? j - 1 : j] != null ? this.structureBuilding[i, j - 1 > 0 ? j - 1 : j] : null);
+                
+                this.structureBuilding[i, j].SetRightNeighbour(this.structureBuilding[i, j + 1 < this.structureWidth ? j + 1 : j] != null ? this.structureBuilding[i, j + 1 < this.structureWidth ? j + 1 : j] : null);
+                
+                this.structureBuilding[i, j].SetTopNeighbour(this.structureBuilding[i + 1 < this.structureHeight ? i + 1 : i, j] != null ? this.structureBuilding[i + 1 < this.structureHeight ? i + 1 : i,j] : null);
+                
+                this.structureBuilding[i, j].SetBottomNeighbour(this.structureBuilding[i - 1 > 0 ? i - 1 : i, j] != null ? this.structureBuilding[i - 1 > 0 ? i - 1 : i,j] : null);
             }
         }
     }
@@ -398,7 +401,7 @@ public class PlayerManager : MonoBehaviour
                 return;
             }
 
-            if (this.structure[this.currentY - 1, x] == BuildingType.Foreuse)
+            if (this.structure[this.currentY - 1 > 0 ? this.currentY - 1 : this.currentY, x] == BuildingType.Foreuse)
             {
                 Debug.Log("Foreuse en bas");
                 return;
@@ -559,7 +562,7 @@ public class PlayerManager : MonoBehaviour
                 }
             }
 
-            if (this.structure[midHeight, midWidth] != BuildingType.None)
+            if (this.structure[midHeight, midWidth] != BuildingType.None && this.structure[midHeight, midWidth] == BuildingType.Center)
             {
                 this.structureBuilding[midHeight, midWidth].SetConnectedToTheCenter(true,true);
             }
@@ -571,7 +574,7 @@ public class PlayerManager : MonoBehaviour
 
     private IEnumerator CheckConnectedBuilding()
     {
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(5.0f);
         for (int i = 0; i < this.structureHeight; i++)
         {
             for (int j = 0; j < this.structureWidth; j++)
