@@ -82,6 +82,7 @@ public class PlayerInputDetector : MonoBehaviour
                         this.inputDown = true;
                     }
                     
+                    // Deplacement
                     if (Mathf.Abs(Input.GetAxis(this.deplacementAxis)) > 0.1f && !this.inputDown)
                     {
                         this.playerManager.UpdateConstructorPosition(0, Input.GetAxis(this.deplacementAxis) > 0.1f ? 1 : -1);
@@ -97,6 +98,17 @@ public class PlayerInputDetector : MonoBehaviour
                         this.inputDown = false;
                     }
 
+                    // Building selection
+                    if (Input.GetKeyDown(this.switchLeftSelectedBuildingButton))
+                    {
+                        this.playerManager.UpdateSelectedBuilding(-1);
+                    }
+                    else if (Input.GetKeyDown(this.switchRightSelectedBuildingButton))
+                    {
+                        this.playerManager.UpdateSelectedBuilding(1);
+                    }
+                    
+                    // Building Validation
                     if (Input.GetKeyDown(this.validationButton))
                     {
                         this.playerManager.BuildSelectedBuilding();

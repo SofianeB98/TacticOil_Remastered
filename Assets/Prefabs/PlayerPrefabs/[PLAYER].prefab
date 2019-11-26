@@ -134,6 +134,7 @@ MonoBehaviour:
   mastoBuilding: {fileID: 3535028058522502581}
   centraleBuilding: {fileID: 9118292691372492800}
   canonBuilding: {fileID: 8897264589178041798}
+  yOffset: 2
 --- !u!1 &3284644874931583072
 GameObject:
   m_ObjectHideFlags: 0
@@ -254,8 +255,8 @@ MonoBehaviour:
   fireRightButton: 50
   constructorModeButton: 97
   validationButton: 114
-  switchRightSelectedBuildingButton: 107
-  switchLeftSelectedBuildingButton: 108
+  switchRightSelectedBuildingButton: 108
+  switchLeftSelectedBuildingButton: 107
 --- !u!114 &392591836374371935
 MonoBehaviour:
   m_ObjectHideFlags: 0

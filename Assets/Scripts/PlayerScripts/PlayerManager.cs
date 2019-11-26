@@ -32,8 +32,11 @@ public class PlayerManager : MonoBehaviour
     private float currentWeight = 0.0f;
 
     [Header("Constructor Information")] 
+    [SerializeField] private int defaultMatter = 200;
     [SerializeField] private ConstructorSelectedManager selectedBuildingVisual;
+    private int currentMatter = 0;
     private BuildingType currentSelectedBuilding = BuildingType.City;
+    private int currentSelectedBuildingAsInt = 0;
     private int currentX = 0;
     private int currentY = 0;
     
@@ -70,6 +73,7 @@ public class PlayerManager : MonoBehaviour
 
         this.currentX = this.midWidth;
         this.currentY = this.midHeight;
+        this.currentMatter = this.defaultMatter;
     }
 
     // ----------------------------------------------------------------------------------------------------------
@@ -345,8 +349,39 @@ public class PlayerManager : MonoBehaviour
         this.selectedBuildingVisual.SetPosition(new Vector3(this.currentX - this.midWidth, this.selectedBuildingVisual.YOffset, this.currentY - this.midHeight));
     }
 
+    public void UpdateSelectedBuilding(int dir)
+    {
+        this.currentSelectedBuildingAsInt += dir;
+
+        if (this.currentSelectedBuildingAsInt < 0)
+            this.currentSelectedBuildingAsInt = 2;
+        else if (this.currentSelectedBuildingAsInt > 2)
+            this.currentSelectedBuildingAsInt = 0;
+
+        switch (this.currentSelectedBuildingAsInt)
+        {
+            case 0:
+                this.currentSelectedBuilding = BuildingType.City;
+                
+                if (this.structure[this.currentY, this.currentX] == BuildingType.City)
+                    this.currentSelectedBuilding = BuildingType.Mastodonte;
+                break;
+            
+            case 1:
+                this.currentSelectedBuilding = BuildingType.Canon;
+                break;
+            
+            case 2:
+                this.currentSelectedBuilding = BuildingType.Centrale;
+                break;
+        }
+    }
+    
     public void BuildSelectedBuilding()
     {
+        if (this.structure[this.currentY, this.currentY] == BuildingType.Center)
+            return;
+        
         BuildingClass building;
         switch (this.currentSelectedBuilding)
         {
@@ -361,7 +396,6 @@ public class PlayerManager : MonoBehaviour
                 building.SetTabPosition(this.currentY, this.currentX);
                 break;
         }
-        
         
     }
     
