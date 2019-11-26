@@ -264,10 +264,34 @@ public class PlayerManager : MonoBehaviour
     // To Be update 
     public void SetBuildingNeighbour(int i, int j)
     {
-        this.structureBuilding[i, j].SetLeftNeighbour(this.structureBuilding[i, j - 1] != null ? this.structureBuilding[i, j - 1] : null);
-        this.structureBuilding[i, j].SetRightNeighbour(this.structureBuilding[i, j + 1] != null ? this.structureBuilding[i, j + 1] : null);
-        this.structureBuilding[i, j].SetTopNeighbour(this.structureBuilding[i + 1, j] != null ? this.structureBuilding[i + 1,j] : null);
-        this.structureBuilding[i, j].SetBottomNeighbour(this.structureBuilding[i - 1, j] != null ? this.structureBuilding[i - 1,j] : null);
+        if (j - 1 > 0)
+        {
+            this.structureBuilding[i, j].SetLeftNeighbour(this.structureBuilding[i, j - 1] != null ? this.structureBuilding[i, j - 1] : null);
+            if(this.structureBuilding[i, j - 1] != null)
+                this.structureBuilding[i, j - 1].SetRightNeighbour(this.structureBuilding[i, j]);
+        }
+
+        if (j + 1 < this.structureWidth)
+        {
+            this.structureBuilding[i, j].SetRightNeighbour(this.structureBuilding[i, j + 1] != null ? this.structureBuilding[i, j + 1] : null);
+            if(this.structureBuilding[i, j + 1] != null)
+                this.structureBuilding[i, j + 1].SetLeftNeighbour(this.structureBuilding[i,j]);
+        }
+
+        if (i + 1 < this.structureHeight)
+        {
+            this.structureBuilding[i, j].SetTopNeighbour(this.structureBuilding[i + 1, j] != null ? this.structureBuilding[i + 1,j] : null);
+            if(this.structureBuilding[i + 1, j] != null)
+                this.structureBuilding[i + 1, j].SetBottomNeighbour(this.structureBuilding[i, j]);
+        }
+
+        if (i - 1 > 0)
+        {
+            this.structureBuilding[i, j].SetBottomNeighbour(this.structureBuilding[i - 1, j] != null ? this.structureBuilding[i - 1,j] : null);
+            if(this.structureBuilding[i - 1, j] != null)
+                this.structureBuilding[i - 1, j].SetTopNeighbour(this.structureBuilding[i, j]);
+        }
+        
     }
 
     public void RemoveBuildingFromTab(int i, int j)
@@ -375,11 +399,13 @@ public class PlayerManager : MonoBehaviour
                 this.currentSelectedBuilding = BuildingType.Centrale;
                 break;
         }
+        
+        this.selectedBuildingVisual.EnableSelectedBuilding(this.currentSelectedBuilding);
     }
     
     public void BuildSelectedBuilding()
     {
-        if (this.structure[this.currentY, this.currentY] == BuildingType.Center)
+        if (this.structure[this.currentY, this.currentX] == BuildingType.Center)
             return;
         
         BuildingClass building;
@@ -387,12 +413,16 @@ public class PlayerManager : MonoBehaviour
         {
             case BuildingType.City:
                 building = CityPoolScript.Instance.WakeUp();
+                
                 this.structureBuilding[this.currentY, this.currentX] = building;
+                
+                SetBuildingNeighbour(this.currentY, this.currentX);
                 
                 building.SetPlayerManager(this);
                 
                 building.WakeUp(new Vector3(this.currentX - this.midWidth,0, this.currentY - this.midHeight), this.transform,
                     null, null, null, null);
+                
                 building.SetTabPosition(this.currentY, this.currentX);
                 break;
         }
