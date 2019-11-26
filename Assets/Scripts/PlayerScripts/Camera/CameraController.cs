@@ -11,6 +11,9 @@ public class CameraController : MonoBehaviour
     [Header("Position Information")] 
     [SerializeField] private float distanceFromPlayer = 10.0f;
     
+    [Header("Default Information")]
+    [SerializeField] private Vector3 defaultRotation = new Vector2(45.0f, 0.0f);
+    
     [Header("Rotation Information")]
     [SerializeField] private Vector2 angleXLimits = new Vector2(75.0f, 20.0f);
     [SerializeField, Range(2.0f, 20.0f)] private float speedRotate = 5.0f;
@@ -47,7 +50,7 @@ public class CameraController : MonoBehaviour
                     // --- To be update 
                     this.playerCam.position = Vector3.Lerp(this.playerCam.position,
                         this.player.position + new Vector3(0.0f, this.yOffset, 0.0f), Time.deltaTime*5.0f);
-                    this.playerCam.rotation = Quaternion.Lerp(this.playerCam.rotation, Quaternion.Euler(90.0f, 0.0f, 0.0f), Time.deltaTime * 7.0f);
+                    this.playerCam.rotation = Quaternion.Lerp(this.playerCam.rotation, this.player.rotation * Quaternion.Euler(90.0f, 0.0f, 0.0f), Time.deltaTime * 7.0f);
                     break;
             }
         }
@@ -64,6 +67,13 @@ public class CameraController : MonoBehaviour
         this.AngleYVerification();
     }
 
+    public void ResetCamPosition()
+    {
+        // to be update to lerp it ?
+        this.currentXAngle = this.defaultRotation.x;
+        this.currentYAngle = this.defaultRotation.y;
+    }
+    
     private void AngleYVerification() 
     {
         if (this.currentYAngle > 360) 
@@ -87,5 +97,7 @@ public class CameraController : MonoBehaviour
             this.currentXAngle = this.angleXLimits.y;
         }
     }
+    
+    
     
 }

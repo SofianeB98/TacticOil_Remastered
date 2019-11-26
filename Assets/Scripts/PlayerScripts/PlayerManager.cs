@@ -22,12 +22,20 @@ public class PlayerManager : MonoBehaviour
     private BuildingType[,] structure;
     private BuildingClass[,] structureBuilding;
     private bool destructionWasCalled = false;
-
+    private int midHeight = 0;
+    private int midWidth = 0;
+    
     [Header("Structure Informations")] 
     [SerializeField] private float weightOffset = 5.0f;
     [SerializeField] private float minWeight = 10.0f;
     [SerializeField] private Vector2 weightCoeffRange = new Vector2(0.25f, 1.75f);
     private float currentWeight = 0.0f;
+
+    [Header("Constructor Information")] 
+    [SerializeField] private ConstructorSelectedManager selectedBuildingVisual;
+    private BuildingType currentSelectedBuilding = BuildingType.City;
+    private int currentX = 0;
+    private int currentY = 0;
     
     [Header("Mode")] 
     [SerializeField] private PlayerMode currentMode = PlayerMode.Normal;
@@ -46,32 +54,7 @@ public class PlayerManager : MonoBehaviour
     /// </summary>
     private void Awake()
     {
-        this.structure = new BuildingType[this.structureHeight, this.structureWidth];
-        this.structureBuilding = new BuildingClass[this.structureHeight,this.structureWidth];
-        
-        for (int i = 0; i < this.structureHeight; i++)
-        {
-            for (int j = 0; j < this.structureWidth; j++)
-            {
-                this.structure[i, j] = BuildingType.None;
-            }
-        }
-
-        int midHeight = (this.structureHeight - 1) / 2;
-        int midWidth = (this.structureWidth - 1) / 2;
-        
-        this.structure[midHeight, midWidth] = BuildingType.Center;
-        
-        this.structure[midHeight + 1, midWidth] = BuildingType.Foreuse;
-        this.structure[midHeight + 1, midWidth + 1] = BuildingType.Foreuse;
-        this.structure[midHeight + 1, midWidth - 1] = BuildingType.Foreuse;
-        
-        this.structure[midHeight - 1, midWidth] = BuildingType.City;
-        this.structure[midHeight - 1, midWidth-1] = BuildingType.City;
-        this.structure[midHeight - 1, midWidth+1] = BuildingType.City;
-        
-        this.structure[midHeight, midWidth+1] = BuildingType.Canon;
-        this.structure[midHeight, midWidth-1] = BuildingType.Canon;
+        InitializeStructure();
 
         if (this.playerInputDetector == null)
             this.playerInputDetector = GetComponent<PlayerInputDetector>();
@@ -84,6 +67,45 @@ public class PlayerManager : MonoBehaviour
 
         if (this.cameraController == null)
             this.cameraController = GetComponent<CameraController>();
+
+        this.currentX = this.midWidth;
+        this.currentY = this.midHeight;
+    }
+
+    // ----------------------------------------------------------------------------------------------------------
+    
+    /// <summary>
+    /// Called in Awake()
+    /// Initialize the initial structure
+    /// </summary>
+    private void InitializeStructure()
+    {
+        this.structure = new BuildingType[this.structureHeight, this.structureWidth];
+        this.structureBuilding = new BuildingClass[this.structureHeight, this.structureWidth];
+
+        for (int i = 0; i < this.structureHeight; i++)
+        {
+            for (int j = 0; j < this.structureWidth; j++)
+            {
+                this.structure[i, j] = BuildingType.None;
+            }
+        }
+
+        midHeight = (this.structureHeight - 1) / 2;
+        midWidth = (this.structureWidth - 1) / 2;
+
+        this.structure[midHeight, midWidth] = BuildingType.Center;
+
+        this.structure[midHeight + 1, midWidth] = BuildingType.Foreuse;
+        this.structure[midHeight + 1, midWidth + 1] = BuildingType.Foreuse;
+        this.structure[midHeight + 1, midWidth - 1] = BuildingType.Foreuse;
+
+        this.structure[midHeight - 1, midWidth] = BuildingType.City;
+        this.structure[midHeight - 1, midWidth - 1] = BuildingType.City;
+        this.structure[midHeight - 1, midWidth + 1] = BuildingType.City;
+
+        this.structure[midHeight, midWidth + 1] = BuildingType.Canon;
+        this.structure[midHeight, midWidth - 1] = BuildingType.Canon;
     }
 
     // ----------------------------------------------------------------------------------------------------------
@@ -94,7 +116,7 @@ public class PlayerManager : MonoBehaviour
     private IEnumerator Start()
     {
         yield return new WaitForSeconds(0.1f);
-        InitializeStructure();
+        InitializeBuildingStructure();
         yield break;
     }
 
@@ -104,7 +126,7 @@ public class PlayerManager : MonoBehaviour
     /// Called in Start()
     /// Initialize and instantiate the default structure
     /// </summary>
-    private void InitializeStructure()
+    private void InitializeBuildingStructure()
     {
         for (int i = 0; i < this.structureHeight; i++)
         {
@@ -116,7 +138,7 @@ public class PlayerManager : MonoBehaviour
                 InitializeBuilding(i,j, this.structure[i,j]);
             }
         }
-        InitializeNeighbour();
+        InitializeBuildingNeighbour();
     }
     
     // ----------------------------------------------------------------------------------------------------------
@@ -138,7 +160,7 @@ public class PlayerManager : MonoBehaviour
                 
                 building.SetPlayerManager(this);
                 
-                building.WakeUp(new Vector3(j - this.structureWidth/2,0, i - this.structureHeight/2), this.transform,
+                building.WakeUp(new Vector3(j - this.midWidth,0, i - this.midHeight), this.transform,
                             null, null, null, null);
                 building.SetTabPosition(i, j);
                 break;
@@ -148,7 +170,7 @@ public class PlayerManager : MonoBehaviour
                 this.structureBuilding[i, j] = building;
                 building.SetPlayerManager(this);
                 
-                building.WakeUp(new Vector3(j - this.structureWidth/2,0, i - this.structureHeight/2), this.transform,
+                building.WakeUp(new Vector3(j - this.midWidth,0, i - this.midHeight), this.transform,
                     null, null, null, null);
                 building.SetTabPosition(i, j);
                 break;
@@ -159,7 +181,7 @@ public class PlayerManager : MonoBehaviour
                 
                 building.SetPlayerManager(this);
                 
-                building.WakeUp(new Vector3(j - this.structureWidth/2,0, i - this.structureHeight/2), this.transform,
+                building.WakeUp(new Vector3(j - this.midWidth,0, i - this.midHeight), this.transform,
                     null, null, null, null);
                 building.SetTabPosition(i, j);
                 break;
@@ -170,7 +192,7 @@ public class PlayerManager : MonoBehaviour
                 
                 building.SetPlayerManager(this);
                 
-                building.WakeUp(new Vector3(j - this.structureWidth/2,0, i - this.structureHeight/2), this.transform,
+                building.WakeUp(new Vector3(j - this.midWidth,0, i - this.midHeight), this.transform,
                     null, null, null, null);
                 building.SetTabPosition(i, j);
                 break;
@@ -180,7 +202,7 @@ public class PlayerManager : MonoBehaviour
     
     // ----------------------------------------------------------------------------------------------------------
 
-    private void InitializeNeighbour()
+    private void InitializeBuildingNeighbour()
     {
         for (int i = 0; i < this.structureHeight; i++)
         {
@@ -235,6 +257,7 @@ public class PlayerManager : MonoBehaviour
     
     #region Functions
 
+    // To Be update 
     public void SetBuildingNeighbour(int i, int j)
     {
         this.structureBuilding[i, j].SetLeftNeighbour(this.structureBuilding[i, j - 1] != null ? this.structureBuilding[i, j - 1] : null);
@@ -265,6 +288,84 @@ public class PlayerManager : MonoBehaviour
     }
     
     #endregion
+
+    #region Constructor Function
+
+    public void SetActiveConstructorVisual(bool value)
+    {
+        this.currentX = this.midWidth;
+        this.currentY = this.midHeight;
+        
+        Debug.Log("Je change de mode + "+ value);
+        
+        this.selectedBuildingVisual.SetPosition(new Vector3(this.currentX - this.midWidth, this.selectedBuildingVisual.YOffset, this.currentY - this.midHeight));
+        
+        this.selectedBuildingVisual.gameObject.SetActive(value);
+        
+        if(value)
+            this.selectedBuildingVisual.EnableSelectedBuilding(this.currentSelectedBuilding);
+    }
+
+    public void UpdateConstructorPosition(int dirX, int dirY)
+    {
+        int x = dirX + this.currentX;
+        int y = dirY + this.currentY;
+
+        if (y >= this.structureHeight)
+            y = this.structureHeight - 1;
+        else if (y < 0)
+            y = 0;
+        
+        if (x >= this.structureWidth)
+            x = this.structureWidth - 1;
+        else if (x < 0)
+            x = 0;
+
+//        if (this.structure[y, this.currentX] == BuildingType.None
+//            && this.structure[this.currentY, this.currentX] == BuildingType.None)
+//        {
+//            Debug.Log("la structure au dessus//dessous est none et celle actuelle aussi");
+//            return;
+//        }
+//
+//        if (this.structure[this.currentY, x] == BuildingType.None
+//            && this.structure[this.currentY, this.currentX] == BuildingType.None)
+//        {
+//            Debug.Log("la structure au gauche//droite est none et celle actuelle aussi");
+//            return;
+//        }
+
+        Debug.Log("On change la position");
+        
+        Debug.Log(dirX + " dir x " + dirY + " dir Y ");
+        
+        this.currentX = x;
+        this.currentY = y;
+        
+        this.selectedBuildingVisual.SetPosition(new Vector3(this.currentX - this.midWidth, this.selectedBuildingVisual.YOffset, this.currentY - this.midHeight));
+    }
+
+    public void BuildSelectedBuilding()
+    {
+        BuildingClass building;
+        switch (this.currentSelectedBuilding)
+        {
+            case BuildingType.City:
+                building = CityPoolScript.Instance.WakeUp();
+                this.structureBuilding[this.currentY, this.currentX] = building;
+                
+                building.SetPlayerManager(this);
+                
+                building.WakeUp(new Vector3(this.currentX - this.midWidth,0, this.currentY - this.midHeight), this.transform,
+                    null, null, null, null);
+                building.SetTabPosition(this.currentY, this.currentX);
+                break;
+        }
+        
+        
+    }
+    
+    #endregion
     
     #region Destruction
 
@@ -282,8 +383,12 @@ public class PlayerManager : MonoBehaviour
                     this.structureBuilding[i,j].SetConnectedToTheCenter(false, false);
                 }
             }
+
+            if (this.structure[midHeight, midWidth] != BuildingType.None)
+            {
+                this.structureBuilding[midHeight, midWidth].SetConnectedToTheCenter(true,true);
+            }
             
-            this.structureBuilding[this.structureHeight/2, this.structureWidth/2].SetConnectedToTheCenter(true,true);
             this.destructionWasCalled = true;
             StartCoroutine(CheckConnectedBuilding());
         }
@@ -306,7 +411,7 @@ public class PlayerManager : MonoBehaviour
             }
         }
 
-        InitializeNeighbour();
+        InitializeBuildingNeighbour();
         
         this.destructionWasCalled = false;
         

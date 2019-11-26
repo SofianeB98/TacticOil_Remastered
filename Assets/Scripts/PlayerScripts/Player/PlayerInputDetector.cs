@@ -21,7 +21,8 @@ public class PlayerInputDetector : MonoBehaviour
     [SerializeField] private KeyCode validationButton = KeyCode.R;
     [SerializeField] private KeyCode switchRightSelectedBuildingButton = KeyCode.K;
     [SerializeField] private KeyCode switchLeftSelectedBuildingButton = KeyCode.L;
-
+    private bool inputDown = false;
+    
     private void Awake()
     {
         if (this.playerManager == null)
@@ -67,6 +68,8 @@ public class PlayerInputDetector : MonoBehaviour
                     if (Input.GetKeyDown(this.constructorModeButton))
                     {
                         this.playerManager.SetPlayerMode(PlayerMode.Constructor);
+                        this.playerManager.SetActiveConstructorVisual(true);
+                        this.inputDown = true;
                     }
                     break;
                 
@@ -75,7 +78,30 @@ public class PlayerInputDetector : MonoBehaviour
                     if (Input.GetKeyUp(this.constructorModeButton))
                     {
                         this.playerManager.SetPlayerMode(PlayerMode.Normal);
+                        this.playerManager.SetActiveConstructorVisual(false);
+                        this.inputDown = true;
                     }
+                    
+                    if (Mathf.Abs(Input.GetAxis(this.deplacementAxis)) > 0.1f && !this.inputDown)
+                    {
+                        this.playerManager.UpdateConstructorPosition(0, Input.GetAxis(this.deplacementAxis) > 0.1f ? 1 : -1);
+                        this.inputDown = true;
+                    }
+                    else if (Mathf.Abs(Input.GetAxis(this.rotationAxis)) > 0.1f && !this.inputDown)
+                    {
+                        this.playerManager.UpdateConstructorPosition(Input.GetAxis(this.rotationAxis) > 0.1f ? 1 : -1, 0);
+                        this.inputDown = true;
+                    }
+                    else if(Mathf.Abs(Input.GetAxis(this.rotationAxis)) <= 0.1f && Mathf.Abs(Input.GetAxis(this.deplacementAxis)) <= 0.1f)
+                    {
+                        this.inputDown = false;
+                    }
+
+                    if (Input.GetKeyDown(this.validationButton))
+                    {
+                        this.playerManager.BuildSelectedBuilding();
+                    }
+                    
                     break;
             }
         }
