@@ -349,19 +349,25 @@ public class PlayerManager : MonoBehaviour
         else if (x < 0)
             x = 0;
 
-//        if (this.structure[y, this.currentX] == BuildingType.None
-//            && this.structure[this.currentY, this.currentX] == BuildingType.None)
-//        {
-//            Debug.Log("la structure au dessus//dessous est none et celle actuelle aussi");
-//            return;
-//        }
-//
-//        if (this.structure[this.currentY, x] == BuildingType.None
-//            && this.structure[this.currentY, this.currentX] == BuildingType.None)
-//        {
-//            Debug.Log("la structure au gauche//droite est none et celle actuelle aussi");
-//            return;
-//        }
+        if (this.structure[y, this.currentX] == BuildingType.None
+            && this.structure[y + 1 < this.structureHeight ? y + 1 : y, this.currentX] == BuildingType.None
+            && this.structure[y - 1 > 0 ? y - 1 : y, this.currentX] == BuildingType.None
+            && this.structure[y, this.currentX + 1 < this.structureWidth ? this.currentX + 1 : this.currentX] == BuildingType.None
+            && this.structure[y, this.currentX - 1 > 0 ? this.currentX - 1 : this.currentX] == BuildingType.None)
+        {
+            Debug.Log("la structure au dessus//dessous est none et celle actuelle aussi");
+            return;
+        }
+
+        if (this.structure[this.currentY, x] == BuildingType.None
+            && this.structure[this.currentY + 1 < this.structureHeight ? this.currentY + 1 : this.currentY, x] == BuildingType.None
+            && this.structure[this.currentY - 1 > 0 ? this.currentY - 1 : this.currentY, x] == BuildingType.None
+            && this.structure[this.currentY, x + 1 < this.structureWidth ? x + 1 : x] == BuildingType.None
+            && this.structure[this.currentY, x - 1 > 0 ? x - 1 : x] == BuildingType.None)
+        {
+            Debug.Log("la structure a gauche//droite est none et celle actuelle aussi");
+            return;
+        }
 
         Debug.Log("On change la position");
         
@@ -427,6 +433,7 @@ public class PlayerManager : MonoBehaviour
                 break;
         }
         
+        this.structure[this.currentY, this.currentX] = this.currentSelectedBuilding;
     }
     
     #endregion
