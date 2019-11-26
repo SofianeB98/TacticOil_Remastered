@@ -261,7 +261,6 @@ public class PlayerManager : MonoBehaviour
     
     #region Functions
 
-    // To Be update 
     public void SetBuildingNeighbour(int i, int j)
     {
         if (j - 1 > 0)
@@ -419,6 +418,54 @@ public class PlayerManager : MonoBehaviour
         {
             case BuildingType.City:
                 building = CityPoolScript.Instance.WakeUp();
+                
+                this.structureBuilding[this.currentY, this.currentX] = building;
+                
+                SetBuildingNeighbour(this.currentY, this.currentX);
+                
+                building.SetPlayerManager(this);
+                
+                building.WakeUp(new Vector3(this.currentX - this.midWidth,0, this.currentY - this.midHeight), this.transform,
+                    null, null, null, null);
+                
+                building.SetTabPosition(this.currentY, this.currentX);
+                break;
+            
+            case BuildingType.Canon:
+                building = CanonPoolScript.Instance.WakeUp();
+                
+                this.structureBuilding[this.currentY, this.currentX] = building;
+                
+                SetBuildingNeighbour(this.currentY, this.currentX);
+                
+                building.SetPlayerManager(this);
+                
+                building.WakeUp(new Vector3(this.currentX - this.midWidth,0, this.currentY - this.midHeight), this.transform,
+                    null, null, null, null);
+                
+                building.SetTabPosition(this.currentY, this.currentX);
+                break;
+            
+            case BuildingType.Centrale:
+                return;
+                
+                building = CanonPoolScript.Instance.WakeUp();
+                
+                this.structureBuilding[this.currentY, this.currentX] = building;
+                
+                SetBuildingNeighbour(this.currentY, this.currentX);
+                
+                building.SetPlayerManager(this);
+                
+                building.WakeUp(new Vector3(this.currentX - this.midWidth,0, this.currentY - this.midHeight), this.transform,
+                    null, null, null, null);
+                
+                building.SetTabPosition(this.currentY, this.currentX);
+                break;
+            
+            case BuildingType.Mastodonte:
+                return;
+                building = CanonPoolScript.Instance.WakeUp();
                 
                 this.structureBuilding[this.currentY, this.currentX] = building;
                 
