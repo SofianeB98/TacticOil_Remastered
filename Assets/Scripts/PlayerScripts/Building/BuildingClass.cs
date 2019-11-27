@@ -31,25 +31,20 @@ public class BuildingClass : MonoBehaviour
         if (this.defaultResistance <= 0)
         {
             ApplyDamage(200);
+            this.defaultResistance = 100;
         }
     }
 
     #region Pooling
 
-    public virtual void WakeUp(Vector3 position, Transform parent, 
-        BuildingClass leftNeighbour, BuildingClass rightNeighbour, BuildingClass topNeighbour,  BuildingClass bottomNeighbour)
+    public virtual void WakeUp(Vector3 position, Transform parent)
     {
         this.currentResistance = this.defaultResistance;
         
         this.isConnectedToTheCenter = true;
         
         this.transform.position = position;
-        
-        this.bottomNeighbour = bottomNeighbour;
-        this.leftNeighbour = leftNeighbour;
-        this.rightNeighbour = rightNeighbour;
-        this.topNeighbour = topNeighbour;
-        
+
         this.playerManager.UpdateStructureWeight(this.buildingWeight);
         
         this.transform.SetParent(parent);
@@ -112,22 +107,22 @@ public class BuildingClass : MonoBehaviour
         this.playerManager = playerManager;
     }
     
-    public void SetLeftNeighbour(BuildingClass neighbour = null)
+    public void SetLeftNeighbour(BuildingClass neighbour)
     {
         this.leftNeighbour = neighbour;
     }
 
-    public void SetRightNeighbour(BuildingClass neighbour = null)
+    public void SetRightNeighbour(BuildingClass neighbour)
     {
         this.rightNeighbour = neighbour;
     }
     
-    public void SetTopNeighbour(BuildingClass neighbour = null)
+    public void SetTopNeighbour(BuildingClass neighbour)
     {
         this.topNeighbour = neighbour;
     }
     
-    public void SetBottomNeighbour(BuildingClass neighbour = null)
+    public void SetBottomNeighbour(BuildingClass neighbour)
     {
         this.bottomNeighbour = neighbour;
     }
@@ -135,15 +130,18 @@ public class BuildingClass : MonoBehaviour
     public void SetConnectedToTheCenter(bool value, bool launchNeighbourChecker)
     {
         this.isConnectedToTheCenter = value;
-        
-        if(launchNeighbourChecker)
+
+        if (launchNeighbourChecker)
+        {
+            Debug.Log("on set les voisin connecter au centre");
             SetNeighbourConnectedToTheCenter();
+        }
     }
 
     public void SetTabPosition(int i, int j)
     {
-        this.posTabX = i;
-        this.posTabY = j;
+        this.posTabX = j;
+        this.posTabY = i;
     }
 
     public void SetPosition(Vector3 pos)
@@ -164,19 +162,19 @@ public class BuildingClass : MonoBehaviour
     public virtual void SetNeighbourConnectedToTheCenter()
     {
         if(this.leftNeighbour != null)
-            if(!this.leftNeighbour.IsConnectedToTheCenter && this.leftNeighbour.gameObject.activeSelf)
+            if(!this.leftNeighbour.IsConnectedToTheCenter)
                 this.leftNeighbour.SetConnectedToTheCenter(true ,true);
         
         if(this.rightNeighbour != null)
-            if(!this.rightNeighbour.IsConnectedToTheCenter && this.rightNeighbour.gameObject.activeSelf)
+            if(!this.rightNeighbour.IsConnectedToTheCenter)
                 this.rightNeighbour.SetConnectedToTheCenter(true,true);
         
         if(this.bottomNeighbour != null)
-            if(!this.bottomNeighbour.IsConnectedToTheCenter && this.bottomNeighbour.gameObject.activeSelf)
+            if(!this.bottomNeighbour.IsConnectedToTheCenter)
                 this.bottomNeighbour.SetConnectedToTheCenter(true,true);
         
         if(this.topNeighbour != null)
-            if(!this.topNeighbour.IsConnectedToTheCenter && this.topNeighbour.gameObject.activeSelf)
+            if(!this.topNeighbour.IsConnectedToTheCenter)
                 this.topNeighbour.SetConnectedToTheCenter(true,true);
     }
 }

@@ -164,8 +164,7 @@ public class PlayerManager : MonoBehaviour
                 
                 building.SetPlayerManager(this);
                 
-                building.WakeUp(new Vector3(j - this.midWidth,0, i - this.midHeight), this.transform,
-                            null, null, null, null);
+                building.WakeUp(new Vector3(j - this.midWidth,0, i - this.midHeight), this.transform);
                 building.SetTabPosition(i, j);
                 break;
             
@@ -174,8 +173,7 @@ public class PlayerManager : MonoBehaviour
                 this.structureBuilding[i, j] = building;
                 building.SetPlayerManager(this);
                 
-                building.WakeUp(new Vector3(j - this.midWidth,0, i - this.midHeight), this.transform,
-                    null, null, null, null);
+                building.WakeUp(new Vector3(j - this.midWidth,0, i - this.midHeight), this.transform);
                 building.SetTabPosition(i, j);
                 break;
             
@@ -185,8 +183,7 @@ public class PlayerManager : MonoBehaviour
                 
                 building.SetPlayerManager(this);
                 
-                building.WakeUp(new Vector3(j - this.midWidth,0, i - this.midHeight), this.transform,
-                    null, null, null, null);
+                building.WakeUp(new Vector3(j - this.midWidth,0, i - this.midHeight), this.transform);
                 building.SetTabPosition(i, j);
                 break;
             
@@ -196,8 +193,7 @@ public class PlayerManager : MonoBehaviour
                 
                 building.SetPlayerManager(this);
                 
-                building.WakeUp(new Vector3(j - this.midWidth,0, i - this.midHeight), this.transform,
-                    null, null, null, null);
+                building.WakeUp(new Vector3(j - this.midWidth,0, i - this.midHeight), this.transform);
                 building.SetTabPosition(i, j);
                 break;
         }
@@ -215,13 +211,15 @@ public class PlayerManager : MonoBehaviour
                 if (this.structureBuilding[i, j] == null)
                     continue;
                 
-                this.structureBuilding[i, j].SetLeftNeighbour(this.structureBuilding[i, j - 1 > 0 ? j - 1 : j] != null ? this.structureBuilding[i, j - 1 > 0 ? j - 1 : j] : null);
-                
-                this.structureBuilding[i, j].SetRightNeighbour(this.structureBuilding[i, j + 1 < this.structureWidth ? j + 1 : j] != null ? this.structureBuilding[i, j + 1 < this.structureWidth ? j + 1 : j] : null);
-                
-                this.structureBuilding[i, j].SetTopNeighbour(this.structureBuilding[i + 1 < this.structureHeight ? i + 1 : i, j] != null ? this.structureBuilding[i + 1 < this.structureHeight ? i + 1 : i,j] : null);
-                
-                this.structureBuilding[i, j].SetBottomNeighbour(this.structureBuilding[i - 1 > 0 ? i - 1 : i, j] != null ? this.structureBuilding[i - 1 > 0 ? i - 1 : i,j] : null);
+                SetBuildingNeighbour(i,j);
+
+//                this.structureBuilding[i, j].SetLeftNeighbour(this.structureBuilding[i, j - 1 > 0 ? j - 1 : j] != null ? this.structureBuilding[i, j - 1 > 0 ? j - 1 : j] : null);
+//                
+//                this.structureBuilding[i, j].SetRightNeighbour(this.structureBuilding[i, j + 1 < this.structureWidth ? j + 1 : j] != null ? this.structureBuilding[i, j + 1 < this.structureWidth ? j + 1 : j] : null);
+//                
+//                this.structureBuilding[i, j].SetTopNeighbour(this.structureBuilding[i + 1 < this.structureHeight ? i + 1 : i, j] != null ? this.structureBuilding[i + 1 < this.structureHeight ? i + 1 : i,j] : null);
+//                
+//                this.structureBuilding[i, j].SetBottomNeighbour(this.structureBuilding[i - 1 > 0 ? i - 1 : i, j] != null ? this.structureBuilding[i - 1 > 0 ? i - 1 : i,j] : null);
             }
         }
     }
@@ -266,32 +264,57 @@ public class PlayerManager : MonoBehaviour
 
     public void SetBuildingNeighbour(int i, int j)
     {
-        if (j - 1 > 0)
+        if (j - 1 >= 0)
         {
-            this.structureBuilding[i, j].SetLeftNeighbour(this.structureBuilding[i, j - 1] != null ? this.structureBuilding[i, j - 1] : null);
-            if(this.structureBuilding[i, j - 1] != null)
+            if (this.structureBuilding[i, j - 1] != null)
+            {
+                this.structureBuilding[i, j].SetLeftNeighbour(this.structureBuilding[i, j - 1]);
                 this.structureBuilding[i, j - 1].SetRightNeighbour(this.structureBuilding[i, j]);
+            }
+            else
+            {
+                this.structureBuilding[i, j].SetLeftNeighbour(null);
+            }
         }
 
         if (j + 1 < this.structureWidth)
         {
-            this.structureBuilding[i, j].SetRightNeighbour(this.structureBuilding[i, j + 1] != null ? this.structureBuilding[i, j + 1] : null);
-            if(this.structureBuilding[i, j + 1] != null)
+            if (this.structureBuilding[i, j + 1] != null)
+            {
+                this.structureBuilding[i, j].SetRightNeighbour(this.structureBuilding[i, j + 1]);
                 this.structureBuilding[i, j + 1].SetLeftNeighbour(this.structureBuilding[i,j]);
+            }
+            else
+            {
+                this.structureBuilding[i, j].SetRightNeighbour(null);
+            }
         }
 
         if (i + 1 < this.structureHeight)
         {
-            this.structureBuilding[i, j].SetTopNeighbour(this.structureBuilding[i + 1, j] != null ? this.structureBuilding[i + 1,j] : null);
-            if(this.structureBuilding[i + 1, j] != null)
+            if (this.structureBuilding[i + 1, j] != null)
+            {
+                this.structureBuilding[i, j].SetTopNeighbour(this.structureBuilding[i + 1, j]);
                 this.structureBuilding[i + 1, j].SetBottomNeighbour(this.structureBuilding[i, j]);
+            }
+            else
+            {
+                this.structureBuilding[i, j].SetTopNeighbour(null);
+            }
         }
 
-        if (i - 1 > 0)
+        if (i - 1 >= 0)
         {
-            this.structureBuilding[i, j].SetBottomNeighbour(this.structureBuilding[i - 1, j] != null ? this.structureBuilding[i - 1,j] : null);
-            if(this.structureBuilding[i - 1, j] != null)
+            if (this.structureBuilding[i - 1, j] != null)
+            {
+                this.structureBuilding[i, j].SetBottomNeighbour(this.structureBuilding[i - 1, j]);
                 this.structureBuilding[i - 1, j].SetTopNeighbour(this.structureBuilding[i, j]);
+            }
+            else
+            {
+                this.structureBuilding[i, j].SetBottomNeighbour(null);
+            }
+            
         }
         
     }
@@ -337,8 +360,6 @@ public class PlayerManager : MonoBehaviour
         this.currentX = this.midWidth;
         this.currentY = this.midHeight;
         
-        Debug.Log("Je change de mode + "+ value);
-        
         this.selectedBuildingVisual.SetPosition(new Vector3(this.currentX - this.midWidth, this.selectedBuildingVisual.YOffset, this.currentY - this.midHeight));
         
         this.selectedBuildingVisual.gameObject.SetActive(value);
@@ -365,9 +386,9 @@ public class PlayerManager : MonoBehaviour
         if (this.structure[y, this.currentX] == BuildingType.None)
         {
             if (this.structure[y + 1 < this.structureHeight ? y + 1 : y, this.currentX] == BuildingType.None
-                && this.structure[y - 1 > 0 ? y - 1 : y, this.currentX] == BuildingType.None
+                && this.structure[y - 1 >= 0 ? y - 1 : y, this.currentX] == BuildingType.None
                 && this.structure[y, this.currentX + 1 < this.structureWidth ? this.currentX + 1 : this.currentX] == BuildingType.None
-                && this.structure[y, this.currentX - 1 > 0 ? this.currentX - 1 : this.currentX] == BuildingType.None)
+                && this.structure[y, this.currentX - 1 >= 0 ? this.currentX - 1 : this.currentX] == BuildingType.None)
             {
                 Debug.Log("la structure au dessus//dessous est none et celle actuelle aussi");
                 return;
@@ -386,9 +407,9 @@ public class PlayerManager : MonoBehaviour
         if (this.structure[this.currentY, x] == BuildingType.None)
         {
             if (this.structure[this.currentY + 1 < this.structureHeight ? this.currentY + 1 : this.currentY, x] == BuildingType.None
-                && this.structure[this.currentY - 1 > 0 ? this.currentY - 1 : this.currentY, x] == BuildingType.None
+                && this.structure[this.currentY - 1 >= 0 ? this.currentY - 1 : this.currentY, x] == BuildingType.None
                 && this.structure[this.currentY, x + 1 < this.structureWidth ? x + 1 : x] == BuildingType.None 
-                && this.structure[this.currentY, x - 1 > 0 ? x - 1 : x] == BuildingType.None )
+                && this.structure[this.currentY, x - 1 >= 0 ? x - 1 : x] == BuildingType.None )
             {
                 Debug.Log("la structure a gauche//droite est none et celle actuelle aussi");
                 return;
@@ -478,12 +499,11 @@ public class PlayerManager : MonoBehaviour
                 
                 this.structureBuilding[this.currentY, this.currentX] = building;
                 
-                SetBuildingNeighbour(this.currentY, this.currentX);
-                
                 building.SetPlayerManager(this);
                 
-                building.WakeUp(new Vector3(this.currentX - this.midWidth,0, this.currentY - this.midHeight), this.transform,
-                    null, null, null, null);
+                SetBuildingNeighbour(this.currentY, this.currentX);
+                
+                building.WakeUp(new Vector3(this.currentX - this.midWidth,0, this.currentY - this.midHeight), this.transform);
                 
                 building.SetTabPosition(this.currentY, this.currentX);
                 break;
@@ -497,8 +517,7 @@ public class PlayerManager : MonoBehaviour
                 
                 building.SetPlayerManager(this);
                 
-                building.WakeUp(new Vector3(this.currentX - this.midWidth,0, this.currentY - this.midHeight), this.transform,
-                    null, null, null, null);
+                building.WakeUp(new Vector3(this.currentX - this.midWidth,0, this.currentY - this.midHeight), this.transform);
                 
                 building.SetTabPosition(this.currentY, this.currentX);
                 break;
@@ -514,8 +533,7 @@ public class PlayerManager : MonoBehaviour
                 
                 building.SetPlayerManager(this);
                 
-                building.WakeUp(new Vector3(this.currentX - this.midWidth,0, this.currentY - this.midHeight), this.transform,
-                    null, null, null, null);
+                building.WakeUp(new Vector3(this.currentX - this.midWidth,0, this.currentY - this.midHeight), this.transform);
                 
                 building.SetTabPosition(this.currentY, this.currentX);
                 break;
@@ -530,8 +548,7 @@ public class PlayerManager : MonoBehaviour
                 
                 building.SetPlayerManager(this);
                 
-                building.WakeUp(new Vector3(this.currentX - this.midWidth,0, this.currentY - this.midHeight), this.transform,
-                    null, null, null, null);
+                building.WakeUp(new Vector3(this.currentX - this.midWidth,0, this.currentY - this.midHeight), this.transform);
                 
                 building.SetTabPosition(this.currentY, this.currentX);
                 break;
@@ -564,17 +581,22 @@ public class PlayerManager : MonoBehaviour
 
             if (this.structure[midHeight, midWidth] != BuildingType.None && this.structure[midHeight, midWidth] == BuildingType.Center)
             {
+                Debug.Log("le centre est connecter a lui meme");
                 this.structureBuilding[midHeight, midWidth].SetConnectedToTheCenter(true,true);
             }
             
             this.destructionWasCalled = true;
+            
             StartCoroutine(CheckConnectedBuilding());
         }
     }
 
     private IEnumerator CheckConnectedBuilding()
     {
-        yield return new WaitForSeconds(5.0f);
+        yield return new WaitForSeconds(1.0f);
+        
+        Debug.Log("Destruction !");
+        
         for (int i = 0; i < this.structureHeight; i++)
         {
             for (int j = 0; j < this.structureWidth; j++)
@@ -589,7 +611,7 @@ public class PlayerManager : MonoBehaviour
             }
         }
 
-        InitializeBuildingNeighbour();
+        //InitializeBuildingNeighbour();
         
         this.destructionWasCalled = false;
         
