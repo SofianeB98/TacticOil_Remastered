@@ -9,6 +9,10 @@ public class BuildingClass : MonoBehaviour
     
     protected bool isConnectedToTheCenter = true;
     public bool IsConnectedToTheCenter => isConnectedToTheCenter;
+
+    [Header("Building Construction Information")] 
+    [SerializeField] private int costMatter = 20;
+    public int CostMatter => costMatter;
     
     [Header("Neighbour")]
     [SerializeField] protected BuildingClass leftNeighbour;
@@ -51,7 +55,7 @@ public class BuildingClass : MonoBehaviour
         this.gameObject.SetActive(true);
     }
 
-    public virtual void Sleep()
+    public virtual void Sleep(bool isDestroyed)
     {
         this.gameObject.SetActive(false);
         this.isConnectedToTheCenter = false;
@@ -89,7 +93,8 @@ public class BuildingClass : MonoBehaviour
             this.topNeighbour = null;
             this.bottomNeighbour = null;
             
-            this.playerManager.LaunchCheckConnectedBuilding();
+            if(isDestroyed)
+                this.playerManager.LaunchCheckConnectedBuilding();
         }
 
         this.playerManager = null;
@@ -155,7 +160,7 @@ public class BuildingClass : MonoBehaviour
         this.currentResistance -= damage;
         if (this.currentResistance <= 0.0f)
         {
-            Sleep();
+            Sleep(true);
         }
     }
 

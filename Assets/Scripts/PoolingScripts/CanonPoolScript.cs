@@ -24,7 +24,7 @@ public class CanonPoolScript : MonoBehaviour
         for (int i = 0; i < this.poolSize; i++)
         {
             this.pool[i] = Instantiate(this.poolEntity);
-            this.pool[i].Sleep();
+            this.pool[i].Sleep(false);
         }
     }
 

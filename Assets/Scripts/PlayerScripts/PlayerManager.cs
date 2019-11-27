@@ -39,6 +39,9 @@ public class PlayerManager : MonoBehaviour
     private int currentSelectedBuildingAsInt = 0;
     private int currentX = 0;
     private int currentY = 0;
+
+    [Header("Destruction Information")] 
+    [SerializeField] private float timeBeforeDestroy = 0.5f;
     
     [Header("Mode")] 
     [SerializeField] private PlayerMode currentMode = PlayerMode.Normal;
@@ -212,14 +215,6 @@ public class PlayerManager : MonoBehaviour
                     continue;
                 
                 SetBuildingNeighbour(i,j);
-
-//                this.structureBuilding[i, j].SetLeftNeighbour(this.structureBuilding[i, j - 1 > 0 ? j - 1 : j] != null ? this.structureBuilding[i, j - 1 > 0 ? j - 1 : j] : null);
-//                
-//                this.structureBuilding[i, j].SetRightNeighbour(this.structureBuilding[i, j + 1 < this.structureWidth ? j + 1 : j] != null ? this.structureBuilding[i, j + 1 < this.structureWidth ? j + 1 : j] : null);
-//                
-//                this.structureBuilding[i, j].SetTopNeighbour(this.structureBuilding[i + 1 < this.structureHeight ? i + 1 : i, j] != null ? this.structureBuilding[i + 1 < this.structureHeight ? i + 1 : i,j] : null);
-//                
-//                this.structureBuilding[i, j].SetBottomNeighbour(this.structureBuilding[i - 1 > 0 ? i - 1 : i, j] != null ? this.structureBuilding[i - 1 > 0 ? i - 1 : i,j] : null);
             }
         }
     }
@@ -479,6 +474,8 @@ public class PlayerManager : MonoBehaviour
     
     public void BuildSelectedBuilding()
     {
+        int cost = 0;
+        
         if (this.structure[this.currentY, this.currentX] == BuildingType.Center)
             return;
 
@@ -493,71 +490,73 @@ public class PlayerManager : MonoBehaviour
             foreuse.SetTabPosition(this.currentY + 1, this.currentX);
             foreuse.SetPosition(new Vector3(this.currentX - this.midWidth,0, this.currentY + 1 - this.midHeight));
         }
+
+        BuildingClass currentBuildingAtPos = null;
+        if (this.structure[this.currentY, this.currentX] != BuildingType.None && this.structure[this.currentY, this.currentX] != BuildingType.Foreuse)
+        {
+            cost -= this.structureBuilding[this.currentY, this.currentX].CostMatter / 2;
+            currentBuildingAtPos = this.structureBuilding[this.currentY,this.currentX];
+        }
         
-        BuildingClass building;
+        BuildingClass building = null;
         switch (this.currentSelectedBuilding)
         {
             case BuildingType.City:
                 building = CityPoolScript.Instance.WakeUp();
-                
-                this.structureBuilding[this.currentY, this.currentX] = building;
-                
-                building.SetPlayerManager(this);
-                
-                SetBuildingNeighbour(this.currentY, this.currentX);
-                
-                building.WakeUp(new Vector3(this.currentX - this.midWidth,0, this.currentY - this.midHeight), this.transform);
-                
-                building.SetTabPosition(this.currentY, this.currentX);
+                cost += building.CostMatter;
+
+                if (this.currentMatter < cost)
+                    break;
                 break;
             
             case BuildingType.Canon:
                 building = CanonPoolScript.Instance.WakeUp();
+                cost += building.CostMatter;
                 
-                this.structureBuilding[this.currentY, this.currentX] = building;
-                
-                SetBuildingNeighbour(this.currentY, this.currentX);
-                
-                building.SetPlayerManager(this);
-                
-                building.WakeUp(new Vector3(this.currentX - this.midWidth,0, this.currentY - this.midHeight), this.transform);
-                
-                building.SetTabPosition(this.currentY, this.currentX);
+                if (this.currentMatter < cost)
+                    break;
                 break;
             
             case BuildingType.Centrale:
                 building = CentralePoolScript.Instance.WakeUp();
+                cost += building.CostMatter;
                 
-                this.structureBuilding[this.currentY, this.currentX] = building;
+                if (this.currentMatter < cost)
+                    break;
                 
-                SetBuildingNeighbour(this.currentY, this.currentX);
-                
-                building.SetPlayerManager(this);
-                
-                building.WakeUp(new Vector3(this.currentX - this.midWidth,0, this.currentY - this.midHeight), this.transform);
-                
-                building.SetTabPosition(this.currentY, this.currentX);
                 break;
             
             case BuildingType.Mastodonte:
                 building = MastodontePoolScript.Instance.WakeUp();
+                cost += building.CostMatter;
                 
-                this.structureBuilding[this.currentY, this.currentX] = building;
-                
-                SetBuildingNeighbour(this.currentY, this.currentX);
-                
-                building.SetPlayerManager(this);
-                
-                building.WakeUp(new Vector3(this.currentX - this.midWidth,0, this.currentY - this.midHeight), this.transform);
-                
-                building.SetTabPosition(this.currentY, this.currentX);
+                if (this.currentMatter < cost)
+                    break;
                 break;
         }
-        
-        this.structure[this.currentY, this.currentX] = this.currentSelectedBuilding;
-        
-        if(this.structure[this.currentY + 1, this.currentX] == BuildingType.Foreuse)
-            SetBuildingNeighbour(this.currentY + 1, this.currentX);
+
+        if (this.currentMatter >= cost)
+        {
+            this.currentMatter -= cost;
+            
+            if(currentBuildingAtPos != null)
+                currentBuildingAtPos.Sleep(false);
+            
+            this.structureBuilding[this.currentY, this.currentX] = building;
+                
+            building.SetPlayerManager(this);
+                
+            SetBuildingNeighbour(this.currentY, this.currentX);
+                
+            building.WakeUp(new Vector3(this.currentX - this.midWidth,0, this.currentY - this.midHeight), this.transform);
+                
+            building.SetTabPosition(this.currentY, this.currentX);
+            
+            this.structure[this.currentY, this.currentX] = this.currentSelectedBuilding;
+
+            if(this.structure[this.currentY + 1, this.currentX] == BuildingType.Foreuse)
+                SetBuildingNeighbour(this.currentY + 1, this.currentX);
+        }
         
         if(this.currentSelectedBuildingAsInt == 0)
             UpdateSelectedBuilding(0);
@@ -596,7 +595,7 @@ public class PlayerManager : MonoBehaviour
 
     private IEnumerator CheckConnectedBuilding()
     {
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(this.timeBeforeDestroy);
         
         Debug.Log("Destruction !");
         
@@ -610,7 +609,7 @@ public class PlayerManager : MonoBehaviour
                 if(this.structureBuilding[i, j].IsConnectedToTheCenter)
                     continue;
                 
-                this.structureBuilding[i,j].Sleep();
+                this.structureBuilding[i,j].Sleep(false);
             }
         }
         
