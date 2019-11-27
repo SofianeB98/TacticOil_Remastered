@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 9086617192093141351}
   - component: {fileID: 6803687609982429507}
   - component: {fileID: 6682817017021249578}
+  - component: {fileID: 97318790912979877}
   m_Layer: 0
   m_Name: Centrale
   m_TagString: Untagged
@@ -92,3 +93,23 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &97318790912979877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6117152426467907538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b6d4d8fa0644dc3a2cd3cf1317a4ed0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerManager: {fileID: 0}
+  leftNeighbour: {fileID: 0}
+  rightNeighbour: {fileID: 0}
+  topNeighbour: {fileID: 0}
+  bottomNeighbour: {fileID: 0}
+  building: 4
+  buildingWeight: 1
+  defaultResistance: 100

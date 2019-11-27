@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 6955620395204909723}
   - component: {fileID: 6955620395204909722}
   - component: {fileID: 6955620395204909721}
+  - component: {fileID: 9038578307475111144}
+  - component: {fileID: 8313609023942011348}
   m_Layer: 0
   m_Name: '[POOLING]'
   m_TagString: Untagged
@@ -48,7 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolEntity: {fileID: 6964677200411414128, guid: b885eba90149e194eaae9e750edc60e2,
     type: 3}
-  poolSize: 30
+  poolSize: 76
 --- !u!114 &6955620395204909723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63,7 +65,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolEntity: {fileID: 4230875752651114282, guid: 65718a8ed476d8345b1f8a9b22ecd5c9,
     type: 3}
-  poolSize: 6
+  poolSize: 5
 --- !u!114 &6955620395204909722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78,7 +80,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolEntity: {fileID: 6484527629123965008, guid: 4419684bb5447e94ab1c5b6e5987685a,
     type: 3}
-  poolSize: 40
+  poolSize: 76
 --- !u!114 &6955620395204909721
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -93,4 +95,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolEntity: {fileID: 6678574339036927199, guid: 3ca3cf0c2df88574bbddf72964d6a6c7,
     type: 3}
-  poolSize: 12
+  poolSize: 14
+--- !u!114 &9038578307475111144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6955620395204909720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e6d0c8f1f8ab3e4bbc60c4f857c0fe1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolEntity: {fileID: 97318790912979877, guid: 5b8c44aebfba0e845a0b0deb2c391ed9,
+    type: 3}
+  poolSize: 40
+--- !u!114 &8313609023942011348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6955620395204909720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecc55e4aea64af44c894930388eb89ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolEntity: {fileID: 1842457682492002902, guid: 4af34c6d94fe8d84bbe38c13a8eb121a,
+    type: 3}
+  poolSize: 40

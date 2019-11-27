@@ -441,6 +441,9 @@ public class PlayerManager : MonoBehaviour
         this.currentX = x;
         this.currentY = y;
         
+        if(this.currentSelectedBuildingAsInt == 0)
+            UpdateSelectedBuilding(0);
+        
         this.selectedBuildingVisual.SetPosition(new Vector3(this.currentX - this.midWidth, this.selectedBuildingVisual.YOffset, this.currentY - this.midHeight));
     }
 
@@ -523,9 +526,7 @@ public class PlayerManager : MonoBehaviour
                 break;
             
             case BuildingType.Centrale:
-                return;
-                
-                building = CanonPoolScript.Instance.WakeUp();
+                building = CentralePoolScript.Instance.WakeUp();
                 
                 this.structureBuilding[this.currentY, this.currentX] = building;
                 
@@ -539,8 +540,7 @@ public class PlayerManager : MonoBehaviour
                 break;
             
             case BuildingType.Mastodonte:
-                return;
-                building = CanonPoolScript.Instance.WakeUp();
+                building = MastodontePoolScript.Instance.WakeUp();
                 
                 this.structureBuilding[this.currentY, this.currentX] = building;
                 
@@ -558,6 +558,9 @@ public class PlayerManager : MonoBehaviour
         
         if(this.structure[this.currentY + 1, this.currentX] == BuildingType.Foreuse)
             SetBuildingNeighbour(this.currentY + 1, this.currentX);
+        
+        if(this.currentSelectedBuildingAsInt == 0)
+            UpdateSelectedBuilding(0);
     }
     
     #endregion
@@ -610,8 +613,6 @@ public class PlayerManager : MonoBehaviour
                 this.structureBuilding[i,j].Sleep();
             }
         }
-
-        //InitializeBuildingNeighbour();
         
         this.destructionWasCalled = false;
         
