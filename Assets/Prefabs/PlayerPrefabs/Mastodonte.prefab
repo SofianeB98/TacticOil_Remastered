@@ -106,10 +106,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerManager: {fileID: 0}
+  costMatter: 30
   leftNeighbour: {fileID: 0}
   rightNeighbour: {fileID: 0}
   topNeighbour: {fileID: 0}
   bottomNeighbour: {fileID: 0}
   building: 6
   buildingWeight: 1
-  defaultResistance: 100
+  defaultResistance: 200

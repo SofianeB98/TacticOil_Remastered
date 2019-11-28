@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class CanonBuilding : BuildingClass
 {
+    [Header("Fire Information")] 
+    [SerializeField] private Transform bulletSpawnTransform;
+    
     private void OnEnable()
     {
         if (this.transform.position.x > 0)

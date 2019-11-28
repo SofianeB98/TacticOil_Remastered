@@ -42,16 +42,22 @@ public class PlayerManager : MonoBehaviour
 
     [Header("Destruction Information")] 
     [SerializeField] private float timeBeforeDestroy = 0.5f;
-    
-    [Header("Mode")] 
-    [SerializeField] private PlayerMode currentMode = PlayerMode.Normal;
-    public PlayerMode CurrentMode => currentMode;
 
+    [Header("Fire Information")] 
+    [SerializeField] private float defaultFireReloading = 2.0f;
+    private float currentRightFireReloading = 0.0f;
+    private float currentLeftFireReloading = 0.0f;
+    private bool canRightFire = true;
+    private bool canLeftFire = true;
     // -- Actions --
     public delegate void Fire();
     public event Fire OnRightFire; // Used to call every "Fire" function for each canon at the right of the center
     public event Fire OnLeftFire; // Used to call every "Fire" function for each canon at the left of the center
     
+    [Header("Mode")] 
+    [SerializeField] private PlayerMode currentMode = PlayerMode.Normal;
+    public PlayerMode CurrentMode => currentMode;
+
     #region Initialization
     // ----------------------------------------------------------------------------------------------------------
     
@@ -77,6 +83,8 @@ public class PlayerManager : MonoBehaviour
         this.currentX = this.midWidth;
         this.currentY = this.midHeight;
         this.currentMatter = this.defaultMatter;
+        this.currentRightFireReloading = this.defaultFireReloading;
+        this.currentLeftFireReloading = this.defaultFireReloading;
     }
 
     // ----------------------------------------------------------------------------------------------------------
@@ -245,12 +253,40 @@ public class PlayerManager : MonoBehaviour
 
     public void LeftFire()
     {
+        if (!this.canLeftFire)
+            return;
+        
         OnLeftFire();
+        this.canLeftFire = false;
+        StartCoroutine(ReloadingCoroutine(true));
     }
 
     public void RightFire()
     {
+        if (!this.canRightFire)
+            return;
+        
         OnRightFire();
+        this.canRightFire = false;
+        StartCoroutine(ReloadingCoroutine(false));
+    }
+
+    private IEnumerator ReloadingCoroutine(bool leftFire)
+    {
+        float timer = 0.0f;
+        float currentReloading = leftFire ? this.currentLeftFireReloading : this.currentRightFireReloading;
+        while (timer < currentReloading)
+        {
+            yield return new WaitForSeconds(0.1f);
+            timer += 0.1f;
+        }
+
+        if (!leftFire)
+            this.canRightFire = true;
+        else
+            this.canLeftFire = true;
+            
+        yield break;
     }
     
     #endregion
