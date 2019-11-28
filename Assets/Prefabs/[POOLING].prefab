@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6955620395204909721}
   - component: {fileID: 9038578307475111144}
   - component: {fileID: 8313609023942011348}
+  - component: {fileID: 6188411712781138938}
   m_Layer: 0
   m_Name: '[POOLING]'
   m_TagString: Untagged
@@ -126,3 +127,18 @@ MonoBehaviour:
   poolEntity: {fileID: 1842457682492002902, guid: 4af34c6d94fe8d84bbe38c13a8eb121a,
     type: 3}
   poolSize: 40
+--- !u!114 &6188411712781138938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6955620395204909720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f750a9b0dccec03489c0c53c94d65537, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolEntity: {fileID: 3494927138125309206, guid: 1fde4e5381f7bea4fa21cb3c19f8e83c,
+    type: 3}
+  poolSize: 90

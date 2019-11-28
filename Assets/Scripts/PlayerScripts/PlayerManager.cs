@@ -85,6 +85,8 @@ public class PlayerManager : MonoBehaviour
         this.currentMatter = this.defaultMatter;
         this.currentRightFireReloading = this.defaultFireReloading;
         this.currentLeftFireReloading = this.defaultFireReloading;
+        
+        this.transform.tag = "Player" + this.playerID.ToString();
     }
 
     // ----------------------------------------------------------------------------------------------------------
@@ -287,6 +289,14 @@ public class PlayerManager : MonoBehaviour
             this.canLeftFire = true;
             
         yield break;
+    }
+
+    public void AddAdditiveReloading(float value, bool leftFire)
+    {
+        if (leftFire)
+            this.currentLeftFireReloading += value;
+        else
+            this.currentRightFireReloading += value;
     }
     
     #endregion
