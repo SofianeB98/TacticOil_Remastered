@@ -215,6 +215,8 @@ MonoBehaviour:
   weightCoeffRange: {x: 0.25, y: 1.75}
   defaultMatter: 200
   selectedBuildingVisual: {fileID: 3722764425094774912}
+  timeBeforeDestroy: 0.5
+  defaultFireReloading: 2
   currentMode: 0
 --- !u!114 &2914314969755765473
 MonoBehaviour:
@@ -233,6 +235,32 @@ MonoBehaviour:
   speedRange: {x: 0, y: 25}
   currentSpeed: 0
   increaseSpeedRapidity: 2
+  loseSpeedPercentAfterCollision: 0.95
+  loseForceSpeedReachMax: 1
+  forceCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -0.0000006802709
+      outSlope: -0.00000057949
+      tangentMode: 1
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.10285707
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -2.9702466
+      outSlope: -3.351291
+      tangentMode: 1
+      weightedMode: 0
+      inWeight: 0.040000677
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   rotationSpeed: 5
   increaseRotationRapidity: 50
   currentRotate: 0

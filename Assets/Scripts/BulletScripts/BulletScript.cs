@@ -15,6 +15,7 @@ public class BulletScript : MonoBehaviour
     [Header("Detection Information")] 
     [SerializeField] private string playerTag = "Player";
     [SerializeField] private string videTag = "Vide";
+    [SerializeField] private string rockTag = "Rock";
 
     private void Awake()
     {
@@ -64,6 +65,11 @@ public class BulletScript : MonoBehaviour
         }
         else if (other.tag.Contains(this.videTag))
         {
+            this.Sleep();
+        }
+        else if (other.tag.Contains(this.rockTag))
+        {
+            //Do something more
             this.Sleep();
         }
         

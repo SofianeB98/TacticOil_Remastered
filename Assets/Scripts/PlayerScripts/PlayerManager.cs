@@ -30,6 +30,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private float minWeight = 10.0f;
     [SerializeField] private Vector2 weightCoeffRange = new Vector2(0.25f, 1.75f);
     private float currentWeight = 0.0f;
+    public float CurrentWeight => currentWeight;
 
     [Header("Constructor Information")] 
     [SerializeField] private int defaultMatter = 200;
@@ -177,7 +178,7 @@ public class PlayerManager : MonoBehaviour
                 
                 building.SetPlayerManager(this);
                 
-                building.WakeUp(new Vector3(j - this.midWidth,0, i - this.midHeight), this.transform);
+                building.WakeUp(new Vector3(j - this.midWidth,0, i - this.midHeight), this.transform, this.tag);
                 building.SetTabPosition(i, j);
                 break;
             
@@ -186,7 +187,7 @@ public class PlayerManager : MonoBehaviour
                 this.structureBuilding[i, j] = building;
                 building.SetPlayerManager(this);
                 
-                building.WakeUp(new Vector3(j - this.midWidth,0, i - this.midHeight), this.transform);
+                building.WakeUp(new Vector3(j - this.midWidth,0, i - this.midHeight), this.transform, this.tag);
                 building.SetTabPosition(i, j);
                 break;
             
@@ -196,7 +197,7 @@ public class PlayerManager : MonoBehaviour
                 
                 building.SetPlayerManager(this);
                 
-                building.WakeUp(new Vector3(j - this.midWidth,0, i - this.midHeight), this.transform);
+                building.WakeUp(new Vector3(j - this.midWidth,0, i - this.midHeight), this.transform, this.tag);
                 building.SetTabPosition(i, j);
                 break;
             
@@ -206,7 +207,7 @@ public class PlayerManager : MonoBehaviour
                 
                 building.SetPlayerManager(this);
                 
-                building.WakeUp(new Vector3(j - this.midWidth,0, i - this.midHeight), this.transform);
+                building.WakeUp(new Vector3(j - this.midWidth,0, i - this.midHeight), this.transform, this.tag);
                 building.SetTabPosition(i, j);
                 break;
         }
@@ -594,7 +595,7 @@ public class PlayerManager : MonoBehaviour
                 
             SetBuildingNeighbour(this.currentY, this.currentX);
                 
-            building.WakeUp(new Vector3(this.currentX - this.midWidth,0, this.currentY - this.midHeight), this.transform);
+            building.WakeUp(new Vector3(this.currentX - this.midWidth,0, this.currentY - this.midHeight), this.transform, this.tag);
                 
             building.SetTabPosition(this.currentY, this.currentX);
             

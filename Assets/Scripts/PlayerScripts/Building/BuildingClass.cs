@@ -6,6 +6,7 @@ using UnityEngine;
 public class BuildingClass : MonoBehaviour
 {
     [SerializeField] protected PlayerManager playerManager;
+    [SerializeField] protected PlayerController playerController;
     
     protected bool isConnectedToTheCenter = true;
     public bool IsConnectedToTheCenter => isConnectedToTheCenter;
@@ -30,18 +31,9 @@ public class BuildingClass : MonoBehaviour
 
     private int posTabX, posTabY;
 
-    private void Update()
-    {
-        if (this.defaultResistance <= 0)
-        {
-            ApplyDamage(200);
-            this.defaultResistance = 100;
-        }
-    }
-
     #region Pooling
 
-    public virtual void WakeUp(Vector3 position, Transform parent)
+    public virtual void WakeUp(Vector3 position, Transform parent, string tag)
     {
         this.currentResistance = this.defaultResistance;
         
@@ -50,6 +42,8 @@ public class BuildingClass : MonoBehaviour
         this.transform.position = position;
 
         this.playerManager.UpdateStructureWeight(this.buildingWeight);
+
+        this.tag = tag;
         
         this.transform.SetParent(parent);
         this.gameObject.SetActive(true);
@@ -97,6 +91,8 @@ public class BuildingClass : MonoBehaviour
                 this.playerManager.LaunchCheckConnectedBuilding();
         }
 
+        this.tag = "Untagged";
+        
         this.playerManager = null;
         
         this.transform.SetParent(null);
@@ -110,6 +106,7 @@ public class BuildingClass : MonoBehaviour
     public void SetPlayerManager(PlayerManager playerManager)
     {
         this.playerManager = playerManager;
+        this.playerController = this.playerManager.GetComponent<PlayerController>();
     }
     
     public void SetLeftNeighbour(BuildingClass neighbour)
