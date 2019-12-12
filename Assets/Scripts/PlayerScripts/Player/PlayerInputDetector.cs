@@ -34,8 +34,8 @@ public class PlayerInputDetector : MonoBehaviour
 
     void Start()
     {
-        //this.deplacementAxis += this.playerManager.PlayerID;
-        //this.rotationAxis += this.playerManager.PlayerID;
+        this.deplacementAxis += this.playerManager.PlayerID;
+        this.rotationAxis += this.playerManager.PlayerID;
     }
 
     // Update is called once per frame

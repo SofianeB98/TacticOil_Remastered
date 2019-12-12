@@ -67,18 +67,23 @@ public class PlayerController : MonoBehaviour
         
         this.collisionForceVelocity += velocity * weight / this.playerManager.CurrentWeight;
         
+        Debug.Log("add force " + this.collisionForceVelocity);
+        
         this.decreaseForceCoroutine = StartCoroutine(DecreaseCollisionForce());
     }
 
     private IEnumerator DecreaseCollisionForce()
     {
         float timer = 0.0f;
-        while (!(timer >= 1.0f))
+        
+        while (timer <= 1.0f)
         {
-            timer += Time.deltaTime/ this.loseForceSpeedReachMax;
-            this.collisionForceVelocity *= this.forceCurve.Evaluate(timer + Time.deltaTime / this.loseForceSpeedReachMax) - this.forceCurve.Evaluate(timer);
-            yield return new WaitForSeconds(Time.deltaTime);
+            Debug.Log("decrease timer");
+            timer += 0.1f/ this.loseForceSpeedReachMax;
+            this.collisionForceVelocity *= this.forceCurve.Evaluate(timer);
+            yield return new WaitForSeconds(0.1f);
         }
+        
         this.collisionForceVelocity = Vector3.zero;
         
         this.decreaseForceCoroutine = null;

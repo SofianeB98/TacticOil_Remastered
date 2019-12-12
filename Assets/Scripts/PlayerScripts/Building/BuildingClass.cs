@@ -35,17 +35,19 @@ public class BuildingClass : MonoBehaviour
 
     public virtual void WakeUp(Vector3 position, Transform parent, string tag)
     {
+        this.transform.SetParent(parent);
+        
         this.currentResistance = this.defaultResistance;
         
         this.isConnectedToTheCenter = true;
         
-        this.transform.position = position;
+        this.transform.localPosition = position;
 
         this.playerManager.UpdateStructureWeight(this.buildingWeight);
 
         this.tag = tag;
         
-        this.transform.SetParent(parent);
+        
         this.gameObject.SetActive(true);
     }
 

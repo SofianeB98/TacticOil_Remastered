@@ -236,7 +236,7 @@ MonoBehaviour:
   currentSpeed: 0
   increaseSpeedRapidity: 2
   loseSpeedPercentAfterCollision: 0.95
-  loseForceSpeedReachMax: 1
+  loseForceSpeedReachMax: 0.25
   forceCurve:
     serializedVersion: 2
     m_Curve:
