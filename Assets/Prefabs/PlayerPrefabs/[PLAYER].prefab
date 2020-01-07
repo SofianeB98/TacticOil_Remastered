@@ -276,8 +276,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecd20f1bb5584f149990c58a80f183b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerManager: {fileID: 0}
-  playerController: {fileID: 0}
+  playerManager: {fileID: 3284644874931583086}
+  playerController: {fileID: 2914314969755765473}
   deplacementAxis: Vertical
   rotationAxis: Horizontal
   fireLeftButton: 49
@@ -323,7 +323,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraController: {fileID: 392591836374371935}
-  playerManager: {fileID: 0}
+  playerManager: {fileID: 3284644874931583086}
   rotationXAxis: Mouse X
   rotationYAxis: Mouse Y
   deadZone: 0.05
