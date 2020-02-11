@@ -1,0 +1,6 @@
+//--------------------------------------
+
+- capture ->
+- Player en vie -> Gamemanager
+- Rocher
+-  

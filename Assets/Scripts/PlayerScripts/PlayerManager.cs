@@ -17,6 +17,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private PlayerInputDetector playerInputDetector;
     
     [Header("Structure Creation")]
+    [SerializeField] private PlayerManagerEvent onPlayerStart;
     [SerializeField] private int structureHeight = 6;
     [SerializeField] private int structureWidth = 4;
     private BuildingType[,] structure;
@@ -42,6 +43,7 @@ public class PlayerManager : MonoBehaviour
     private int currentY = 0;
 
     [Header("Destruction Information")] 
+    [SerializeField] private PlayerManagerEvent onPlayerDie;
     [SerializeField] private float timeBeforeDestroy = 0.5f;
 
     [Header("Fire Information")] 
@@ -89,7 +91,7 @@ public class PlayerManager : MonoBehaviour
         
         this.transform.tag = "Player" + this.playerID.ToString();
     }
-
+    
     // ----------------------------------------------------------------------------------------------------------
     
     /// <summary>
@@ -135,6 +137,7 @@ public class PlayerManager : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f);
         InitializeBuildingStructure();
+        this.onPlayerStart.Invoke(this);
         yield break;
     }
 
@@ -663,6 +666,11 @@ public class PlayerManager : MonoBehaviour
         this.destructionWasCalled = false;
         
         yield break;
+    }
+
+    public void DestroyPlayer()
+    {
+        this.onPlayerDie.Invoke(this);
     }
     
     #endregion

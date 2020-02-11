@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
     <e p="C:\Users\sofia\.Rider2019.2\system\extResources" t="IncludeRecursive" />
@@ -6,23 +6,85 @@
     <e p="D:\Unity\Projects\TacticOil_Remastered" t="IncludeRecursive">
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
+        <e p="Features.txt" t="Include" />
         <e p="Scripts" t="Include">
+          <e p="BulletScripts" t="Include">
+            <e p="BulletScript.cs" t="Include" />
+          </e>
+          <e p="GameElements" t="Include">
+            <e p="Structure.cs" t="Include" />
+          </e>
+          <e p="GameSystem" t="Include">
+            <e p="DecompteTimer.cs" t="Include" />
+            <e p="GameManager.cs" t="Include" />
+            <e p="GameTimer.cs" t="Include" />
+          </e>
           <e p="PlayerScripts" t="Include">
             <e p="Building" t="Include">
               <e p="BuildingClass.cs" t="Include" />
               <e p="BuildingType.cs" t="Include" />
               <e p="CanonBuilding.cs" t="Include" />
               <e p="CenterBuilding.cs" t="Include" />
+              <e p="CentraleBuilding.cs" t="Include" />
               <e p="CityBuilding.cs" t="Include" />
               <e p="ForeuseBuilding.cs" t="Include" />
+              <e p="MastodonteBuilding.cs" t="Include" />
             </e>
+            <e p="Camera" t="Include">
+              <e p="CameraController.cs" t="Include" />
+              <e p="CameraInputDetector.cs" t="Include" />
+            </e>
+            <e p="Constructor" t="Include">
+              <e p="ConstructorSelectedManager.cs" t="Include" />
+            </e>
+            <e p="Player" t="Include">
+              <e p="PlayerController.cs" t="Include" />
+              <e p="PlayerInputDetector.cs" t="Include" />
+              <e p="PlayerMode.cs" t="Include" />
+            </e>
+            <e p="PlayerBehaviorManager.cs" t="Include" />
             <e p="PlayerManager.cs" t="Include" />
           </e>
           <e p="PoolingScripts" t="Include">
+            <e p="BulletPoolScript.cs" t="Include" />
             <e p="CanonPoolScript.cs" t="Include" />
             <e p="CenterPoolScript.cs" t="Include" />
+            <e p="CentralePoolScript.cs" t="Include" />
             <e p="CityPoolScript.cs" t="Include" />
             <e p="ForeusePoolScript.cs" t="Include" />
+            <e p="MastodontePoolScript.cs" t="Include" />
+          </e>
+          <e p="Utils" t="Include">
+            <e p="FloatEvent.cs" t="Include" />
+            <e p="PlayerManagerEvent.cs" t="Include" />
+          </e>
+        </e>
+        <e p="TextMesh Pro" t="Include">
+          <e p="Fonts" t="Include">
+            <e p="LiberationSans - OFL.txt" t="Include" />
+          </e>
+          <e p="Resources" t="Include">
+            <e p="LineBreaking Following Characters.txt" t="Include" />
+            <e p="LineBreaking Leading Characters.txt" t="Include" />
+            <e p="Shaders" t="Include">
+              <e p="TMP_Bitmap-Custom-Atlas.shader" t="Include" />
+              <e p="TMP_Bitmap-Mobile.shader" t="Include" />
+              <e p="TMP_Bitmap.shader" t="Include" />
+              <e p="TMP_SDF Overlay.shader" t="Include" />
+              <e p="TMP_SDF-Mobile Masking.shader" t="Include" />
+              <e p="TMP_SDF-Mobile Overlay.shader" t="Include" />
+              <e p="TMP_SDF-Mobile.shader" t="Include" />
+              <e p="TMP_SDF-Surface-Mobile.shader" t="Include" />
+              <e p="TMP_SDF-Surface.shader" t="Include" />
+              <e p="TMP_SDF.shader" t="Include" />
+              <e p="TMP_Sprite.shader" t="Include" />
+              <e p="TMPro.cginc" t="Include" />
+              <e p="TMPro_Properties.cginc" t="Include" />
+              <e p="TMPro_Surface.cginc" t="Include" />
+            </e>
+          </e>
+          <e p="Sprites" t="Include">
+            <e p="EmojiOne Attribution.txt" t="Include" />
           </e>
         </e>
       </e>

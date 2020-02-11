@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5bf8002c-ebb0-42cb-bbeb-a401efe2beeb" name="Default Changelist" comment="" />
@@ -12,11 +12,76 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameSystem/GameManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4CD14385-55E6-4C0E-AEDA-2393D3C9CF4A/1d/ab020920/Logger.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/PoolingScripts/BulletPoolScript.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Utils/FloatEvent.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/PlayerScripts/Player/PlayerController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/PlayerScripts/Player/PlayerInputDetector.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/599589BF-4CE2-4890-9B8A-14CBE4A2034E/47/79028d9d/String.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/PoolingScripts/CityPoolScript.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/PoolingScripts/CanonPoolScript.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4CD14385-55E6-4C0E-AEDA-2393D3C9CF4A/ef/6b01ce9b/DebugLogHandler.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/PlayerScripts/Camera/CameraInputDetector.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/PoolingScripts/ForeusePoolScript.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/PoolingScripts/CenterPoolScript.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/PlayerScripts/Constructor/ConstructorSelectedManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/PlayerScripts/Building/CanonBuilding.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/599589BF-4CE2-4890-9B8A-14CBE4A2034E/f0/df8b3e0d/ParamsArray.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/BulletScripts/BulletScript.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/PlayerScripts/Building/CenterBuilding.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameSystem/GameTimer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/PlayerScripts/Building/BuildingClass.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../RimeCharacterController/RimeCharacterController/Assets/Project/Scripts/Player/CompleteCharacterController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/599589BF-4CE2-4890-9B8A-14CBE4A2034E/be/d4f5abaa/StringBuilderCache.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/PlayerScripts/Building/ForeuseBuilding.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/599589BF-4CE2-4890-9B8A-14CBE4A2034E/60/005a233b/StringBuilder.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameElements/Structure.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameSystem/DecompteTimer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/PlayerScripts/PlayerManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/PlayerScripts/Camera/CameraController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/PoolingScripts/MastodontePoolScript.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/599589BF-4CE2-4890-9B8A-14CBE4A2034E/b9/8edcd80f/IntPtr.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Utils/PlayerManagerEvent.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/PlayerScripts/Building/CentraleBuilding.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/PlayerScripts/Building/MastodonteBuilding.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4CD14385-55E6-4C0E-AEDA-2393D3C9CF4A/f4/017ce60c/Object.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/PoolingScripts/CentralePoolScript.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4CD14385-55E6-4C0E-AEDA-2393D3C9CF4A/50/4407dac3/Debug.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+        <option value="$PROJECT_DIR$/Assets/Scripts/PlayerScripts/PlayerMode.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/PlayerScripts/PlayerInputDetector.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/PlayerScripts/Camera/CameraInputDetector.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/PlayerScripts/PlayerController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/PlayerScripts/Camera/CameraController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/PlayerScripts/Constructor/ConstructorSelectedManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/PlayerScripts/Building/MastodonteBuilding.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/PoolingScripts/CentralPoolScript.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/PoolingScripts/CityPoolScript.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/PoolingScripts/CentralePoolScript.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/PoolingScripts/CanonPoolScript.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/PoolingScripts/CenterPoolScript.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/PoolingScripts/ForeusePoolScript.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/PoolingScripts/MastodontePoolScript.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/PoolingScripts/BulletPoolScript.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/PlayerScripts/Building/CanonBuilding.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/BulletScripts/BulletScript.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/PlayerScripts/Building/CentraleBuilding.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/PlayerScripts/Player/PlayerInputDetector.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/PlayerScripts/Building/BuildingClass.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/PlayerScripts/Building/ForeuseBuilding.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/PlayerScripts/Player/PlayerController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Utils/FloatEvent.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/GameSystem/DecompteTimer.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/GameSystem/GameTimer.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Utils/PlayerManagerEvent.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/PlayerScripts/Building/CenterBuilding.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/PlayerScripts/Player/PlayerBehaviorManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/GameElements/Structure.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/GameSystem/GameManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/PlayerScripts/PlayerManager.cs" />
       </list>
     </option>
@@ -40,11 +105,11 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
-    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+  <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor &amp; Play">
+    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" pid="31056">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" />
+      <option name="pid" value="31056" />
       <option name="userSelectedPid" value="false" />
       <method v="2" />
     </configuration>
@@ -66,7 +131,28 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1573904428217</updated>
-      <workItem from="1573904430726" duration="315000" />
+      <workItem from="1573904430726" duration="604000" />
+      <workItem from="1574104836654" duration="4369000" />
+      <workItem from="1574444956940" duration="4280000" />
+      <workItem from="1574609295023" duration="1718000" />
+      <workItem from="1574669175282" duration="1281000" />
+      <workItem from="1574687354499" duration="103000" />
+      <workItem from="1574699259398" duration="3492000" />
+      <workItem from="1574754500260" duration="13940000" />
+      <workItem from="1574841434300" duration="10466000" />
+      <workItem from="1574858497846" duration="144000" />
+      <workItem from="1574928166229" duration="1402000" />
+      <workItem from="1574945029981" duration="4429000" />
+      <workItem from="1575013396431" duration="5793000" />
+      <workItem from="1575023685025" duration="472000" />
+      <workItem from="1575029935029" duration="573000" />
+      <workItem from="1576155632178" duration="1533000" />
+      <workItem from="1578298943483" duration="1988000" />
+      <workItem from="1578305595171" duration="369000" />
+      <workItem from="1578384211974" duration="2277000" />
+      <workItem from="1578471759370" duration="1082000" />
+      <workItem from="1578481501438" duration="650000" />
+      <workItem from="1581410683476" duration="1008000" />
     </task>
     <servers />
   </component>
@@ -80,7 +166,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
